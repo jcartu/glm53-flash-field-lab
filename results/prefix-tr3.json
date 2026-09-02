@@ -1,0 +1,13 @@
+{
+  "label": "tr3",
+  "tokens_approx": 16000,
+  "phases": {
+    "cold": 19662.67238301225,
+    "warm": 4052.3412220645696,
+    "restart": 4832.271746941842
+  },
+  "ratios": {
+    "warm_over_cold": 0.206,
+    "restart_over_cold": 0.246
+  }
+}
