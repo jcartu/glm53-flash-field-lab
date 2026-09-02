@@ -1,0 +1,13 @@
+{
+  "label": "r15cache",
+  "tokens_approx": 24000,
+  "phases": {
+    "cold": 4618.39758802671,
+    "warm": 847.5952439475805,
+    "restart": 1328.2997229835019
+  },
+  "ratios": {
+    "warm_over_cold": 0.184,
+    "restart_over_cold": 0.288
+  }
+}
