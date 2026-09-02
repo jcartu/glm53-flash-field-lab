@@ -1,0 +1,13 @@
+{
+  "label": "r12-lmcache",
+  "tokens_approx": 24000,
+  "phases": {
+    "cold": 4881.1406979803,
+    "warm": 1228.181177051738,
+    "restart": 988.5420129867271
+  },
+  "ratios": {
+    "warm_over_cold": 0.252,
+    "restart_over_cold": 0.203
+  }
+}

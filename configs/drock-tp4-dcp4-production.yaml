@@ -1,0 +1,96 @@
+# GLM-5.3-Flash NVFP4 + DFlash2 + LMCache, production-intent TP4/DCP4 profile.
+#
+# Image status: community field-test candidate. The immutable image contains
+# LMCache integration commit 6e479686c7e5e5e40095ac5fbcb740aa809c3046.
+# This exact TP4/DCP4 topology is the CN4 full-system-qualified profile.
+# Valid DCP values for TP4 are 1, 2, and 4.
+#
+# Before starting, set GLM53_MODEL_DIR to the downloaded NVFP4 model if it is
+# not stored at the default path. LMCACHE_L2_DIR should point at a fast local
+# NVMe filesystem with enough free space for the configured L2 maximum.
+#
+#   export GLM53_MODEL_DIR=/models-archive/GLM-5.3-Flash-NVFP4
+#   export LMCACHE_L2_DIR=/fast-nvme/glm53-lmcache/tp4-dcp4
+#   docker compose -f glm53-lmcache-dflash2-tp4-dcp4-production.yaml up -d
+#
+# APC is intentionally enabled. Set ENABLE_PREFIX_CACHING=0 only for an
+# isolation/debug run; normal production use should leave it enabled.
+
+services:
+  glm53-dflash2-tp4-dcp4:
+    image: ghcr.io/yatesdr/jovian-judgement-glm53-lmcache@sha256:bdb5bdc2dca4e196b5f9239c08d543635ca6f5ed4b0a435635fedc92e937f58a
+    container_name: glm53-dflash2-tp4-dcp4
+    init: true
+    restart: unless-stopped
+    network_mode: host
+    ipc: host
+    shm_size: 32gb
+
+    environment:
+      MODEL: /model
+      PORT: "${PORT:-8014}"
+
+      # Parallelism. DCP must divide TP; DCP1/DCP2 are supported fallbacks.
+      TP: "4"
+      DCP: "4"
+      DCP_CKV_GATHER: "1"
+
+      # DFlash2 is the selected production speculator. The target KV cache is
+      # FP8 in the image; the qualified draft-cache setting is auto.
+      SPECULATOR: dflash2
+      DFLASH_MODEL: local-inference-lab/GLM-5.3-Flash-DFlash2
+      NUM_SPECULATIVE_TOKENS: "7"
+      DFLASH_KV_CACHE_DTYPE: auto
+
+      MAX_MODEL_LEN: "${MAX_MODEL_LEN:-262144}"
+      MAX_NUM_SEQS: "${MAX_NUM_SEQS:-16}"
+      MAX_NUM_BATCHED_TOKENS: "${MAX_NUM_BATCHED_TOKENS:-4096}"
+      MAX_CUDAGRAPH_CAPTURE_SIZE: "${MAX_CUDAGRAPH_CAPTURE_SIZE:-128}"
+      GPU_MEMORY_UTILIZATION: "${GPU_MEMORY_UTILIZATION:-0.90}"
+
+      # APC and LMCache are complementary. APC serves GPU-resident prefixes;
+      # LMCache provides the larger DRAM/NVMe tiers.
+      ENABLE_PREFIX_CACHING: "${ENABLE_PREFIX_CACHING:-1}"
+      LMCACHE_CHUNK_SIZE: "4096"
+      LMCACHE_L1_SIZE_GB: "${LMCACHE_L1_SIZE_GB:-64}"
+      LMCACHE_L1_INIT_SIZE_GB: "${LMCACHE_L1_INIT_SIZE_GB:-2}"
+      LMCACHE_INSTANCE_ID: "${LMCACHE_INSTANCE_ID:-glm53-dflash2-tp4-dcp4}"
+      LMCACHE_L2_CONFIG: >-
+        {"type":"fs_native","base_path":"/lmcache-l2","num_workers":8,"use_odirect":false,"max_capacity_gb":${LMCACHE_L2_SIZE_GB:-512},"eviction":{"eviction_policy":"LRU","trigger_watermark":0.8,"eviction_ratio":0.2}}
+
+      # Qualified PCIe workstation communication settings.
+      VLLM_ENABLE_PCIE_ALLREDUCE: "1"
+      NCCL_MIN_NCHANNELS: "32"
+      NCCL_MAX_NCHANNELS: "32"
+      NCCL_CUMEM_ENABLE: "0"
+      NCCL_IB_DISABLE: "1"
+      NCCL_P2P_LEVEL: "${NCCL_P2P_LEVEL:-SYS}"
+      NCCL_PROTO: LL,LL128,Simple
+      OMP_NUM_THREADS: "2"
+
+    volumes:
+      - "${GLM53_MODEL_DIR:-/models-archive/GLM-5.3-Flash-NVFP4}:/model:ro"
+      - "${LMCACHE_L2_DIR:-./lmcache-l2-tp4-dcp4}:/lmcache-l2"
+      - glm53-dflash2-tp4-dcp4-jit:/cache
+      - glm53-dflash2-hf:/root/.cache/huggingface
+
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["0", "1", "2", "3"]
+              capabilities: [gpu]
+
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:$${PORT:-8014}/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 15m
+
+    stop_grace_period: 2m
+
+volumes:
+  glm53-dflash2-tp4-dcp4-jit:
+  glm53-dflash2-hf:

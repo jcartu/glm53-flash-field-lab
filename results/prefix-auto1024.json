@@ -1,0 +1,13 @@
+{
+  "label": "auto1024",
+  "tokens_approx": 24000,
+  "phases": {
+    "cold": 5470.232801977545,
+    "warm": 861.3938270136714,
+    "restart": 1373.1332550523803
+  },
+  "ratios": {
+    "warm_over_cold": 0.157,
+    "restart_over_cold": 0.251
+  }
+}

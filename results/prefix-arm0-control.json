@@ -1,0 +1,13 @@
+{
+  "label": "arm0-control",
+  "tokens_approx": 24000,
+  "phases": {
+    "cold": 7819.587423000485,
+    "warm": 1887.247915030457,
+    "restart": 7680.956971948035
+  },
+  "ratios": {
+    "warm_over_cold": 0.241,
+    "restart_over_cold": 0.982
+  }
+}

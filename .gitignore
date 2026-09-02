@@ -1,0 +1,11 @@
+# secrets / internal ops
+*.env
+*.token
+user-ids.json
+discord-feed.*
+GPU-COORDINATION.md
+watch-discord.sh
+# scratch
+*.log
+__pycache__/
+.cache/

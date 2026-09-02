@@ -1,0 +1,108 @@
+# GLM-5.3-Flash NVFP4 + MTP3 + LMCache, production-intent TP4/DCP4 profile.
+# Full image/source/test pedigree (including the matched MTP3 benchmark):
+# glm53-lmcache-dflash2-production-pedigree.md
+# MTP3 is the recommended general-production mode. In the matched CN4
+# TP4/DCP4 comparison it delivered about 31% higher prefill, 31-37% higher
+# decode across C1-C16, and 17.5% more useful KV capacity than DFlash2 depth 7.
+#
+# Image status: community field-test candidate. The immutable image contains
+# LMCache integration commit b3e2da55bc551a302ff6046a6eff35f4458b3685.
+# This exact MTP3 topology has completed its CN4 KV-allocation, performance,
+# text, and vision snapshots. LMCache recovery qualification remains in
+# progress and must not yet be represented as complete.
+# Valid DCP values for TP4 are 1, 2, and 4.
+#
+# Before starting, set GLM53_MODEL_DIR to the downloaded NVFP4 model if it is
+# not stored at the default path. LMCACHE_L2_DIR should point at a fast local
+# NVMe filesystem with enough free space for the configured L2 maximum.
+#
+#   export GLM53_MODEL_DIR=/models-archive/GLM-5.3-Flash-NVFP4
+#   export LMCACHE_L2_DIR=/fast-nvme/glm53-lmcache/tp4-dcp4-mtp3
+#   docker compose -f glm53-lmcache-mtp3-tp4-dcp4-production.yaml up -d
+#
+# APC is intentionally enabled. Set ENABLE_PREFIX_CACHING=0 only for an
+# isolation/debug run; normal production use should leave it enabled.
+
+services:
+  glm53-mtp3-tp4-dcp4:
+    image: ghcr.io/yatesdr/jovian-judgement-glm53-lmcache@sha256:353d7e1597559b7928baf4bfa749b3bf4e7309ef239eb285f32531d4c1a4d13b
+    container_name: glm53-mtp3-tp4-dcp4
+    init: true
+    restart: unless-stopped
+    network_mode: host
+    ipc: host
+    shm_size: 32gb
+
+    environment:
+      MODEL: /model
+      PORT: "${PORT:-8014}"
+
+      # Parallelism. DCP must divide TP; DCP1/DCP2 are supported fallbacks.
+      TP: "4"
+      DCP: "4"
+      DCP_CKV_GATHER: "1"
+
+      # Built-in GLM MTP: three speculative tokens, B12X attention, and the
+      # qualified Humming MXFP8 expert backend. No external draft model loads.
+      SPECULATOR: mtp
+      NUM_SPECULATIVE_TOKENS: "3"
+      MTP_ATTENTION_BACKEND: B12X
+      MTP_MOE_BACKEND: humming
+
+      MAX_MODEL_LEN: "${MAX_MODEL_LEN:-262144}"
+      MAX_NUM_SEQS: "${MAX_NUM_SEQS:-16}"
+      MAX_NUM_BATCHED_TOKENS: "${MAX_NUM_BATCHED_TOKENS:-4096}"
+      MAX_CUDAGRAPH_CAPTURE_SIZE: "${MAX_CUDAGRAPH_CAPTURE_SIZE:-128}"
+      # 0.90 is the validated production value. On this exact four-GPU host,
+      # 0.94 and 0.95 OOM during recurrent-state warmup; 0.96 fails the
+      # initial free-memory gate. Do not raise this without a complete reboot,
+      # warmup, text, vision, and load-validation cycle.
+      GPU_MEMORY_UTILIZATION: "${GPU_MEMORY_UTILIZATION:-0.90}"
+
+      # APC and LMCache are complementary. APC serves GPU-resident prefixes;
+      # LMCache provides the larger DRAM/NVMe tiers.
+      ENABLE_PREFIX_CACHING: "${ENABLE_PREFIX_CACHING:-1}"
+      LMCACHE_CHUNK_SIZE: "4096"
+      LMCACHE_L1_SIZE_GB: "${LMCACHE_L1_SIZE_GB:-64}"
+      # The current server expands the lazy allocator to the configured L1
+      # maximum during startup; this is an initial allocation parameter, not a
+      # promise that only 2 GiB remains pinned.
+      LMCACHE_L1_INIT_SIZE_GB: "${LMCACHE_L1_INIT_SIZE_GB:-2}"
+      LMCACHE_INSTANCE_ID: "${LMCACHE_INSTANCE_ID:-glm53-mtp3-tp4-dcp4}"
+      LMCACHE_L2_CONFIG: >-
+        {"type":"fs_native","base_path":"/lmcache-l2","num_workers":8,"use_odirect":false,"max_capacity_gb":${LMCACHE_L2_SIZE_GB:-512},"eviction":{"eviction_policy":"LRU","trigger_watermark":0.8,"eviction_ratio":0.2}}
+
+      # Qualified PCIe workstation communication settings.
+      VLLM_ENABLE_PCIE_ALLREDUCE: "1"
+      NCCL_MIN_NCHANNELS: "32"
+      NCCL_MAX_NCHANNELS: "32"
+      NCCL_CUMEM_ENABLE: "0"
+      NCCL_IB_DISABLE: "1"
+      NCCL_P2P_LEVEL: "${NCCL_P2P_LEVEL:-SYS}"
+      NCCL_PROTO: LL,LL128,Simple
+      OMP_NUM_THREADS: "2"
+
+    volumes:
+      - "${GLM53_MODEL_DIR:-/models-archive/GLM-5.3-Flash-NVFP4}:/model:ro"
+      - "${LMCACHE_L2_DIR:-./lmcache-l2-tp4-dcp4-mtp3}:/lmcache-l2"
+      - glm53-mtp3-tp4-dcp4-jit:/cache
+
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["0", "1", "2", "3"]
+              capabilities: [gpu]
+
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:$${PORT:-8014}/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 15m
+
+    stop_grace_period: 2m
+
+volumes:
+  glm53-mtp3-tp4-dcp4-jit:

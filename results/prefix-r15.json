@@ -1,0 +1,13 @@
+{
+  "label": "r15",
+  "tokens_approx": 24000,
+  "phases": {
+    "cold": 4191.613752976991,
+    "warm": 3097.280179033987,
+    "restart": 4070.909895002842
+  },
+  "ratios": {
+    "warm_over_cold": 0.739,
+    "restart_over_cold": 0.971
+  }
+}

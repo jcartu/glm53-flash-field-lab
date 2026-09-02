@@ -1,0 +1,169 @@
+# GLM-5.3-Flash Jovian Judgement r12 cache-auto1024 integration candidate.
+# vLLM 47f860871bab2fe4854d9d6c9acefdfc9cd98509 (PR #575)
+# LMCache d6e402b2fcc771c364e9ec15fe26dec0acfe0a1d
+#
+# Tester matrix:
+#   KV_CACHE_QUANT: fp8_ds_mla | nvfp4_ds_mla
+#   TP/DCP:         4/1,2,4 | 8/1,2,4,8
+#   SPECULATOR:     mtp (MTP_DEPTH 0..5) | dflash2
+#   CACHE_MODE:     vram | native | lmcache
+#
+# Automatic split geometry uses the positive LMCache retention interval when
+# present; otherwise it uses the scheduler token budget. Both are divided by
+# DCP, so the defaults resolve to 1024-token target/recurrent pages at DCP4.
+
+services:
+  glm53-r12-cache-auto1024:
+    image: "${IMAGE:-ghcr.io/yatesdr/jovian-judgement-glm53-lmcache:20260901-r12-cache-auto1024-47f86087-d6e402b2@sha256:87ec2835b07f0fc03dbb36b6a7c2a79bae0842f82eead76f3b03c13dafad1d67}"
+    pull_policy: always
+    container_name: "${CONTAINER_NAME:-glm53-r12-cache-auto1024}"
+    init: true
+    restart: unless-stopped
+    network_mode: host
+    # Keep /dev/shm private so native-offload mmap files are reclaimed with
+    # the container. The 64 GiB default DRAM tier needs slightly more than
+    # 64 GiB after row/page alignment.
+    shm_size: "${SHM_SIZE:-96gb}"
+    gpus: all
+
+    environment:
+      MODEL: /model
+      SERVED_MODEL_NAME: "${SERVED_MODEL_NAME:-GLM-5.3-Flash-NVFP4}"
+      HOST: "${HOST:-0.0.0.0}"
+      PORT: "${PORT:-8000}"
+      CUDA_VISIBLE_DEVICES: "${CUDA_VISIBLE_DEVICES:-0,1,2,3}"
+
+      TP: "${TP:-4}"
+      DCP: "${DCP:-4}"
+      CP_KV_CACHE_INTERLEAVE_SIZE: "${CP_KV_CACHE_INTERLEAVE_SIZE:-4}"
+      DCP_CKV_GATHER: "${DCP_CKV_GATHER:-0}"
+      KV_CACHE_QUANT: "${KV_CACHE_QUANT:-nvfp4_ds_mla}"
+
+      SPECULATOR: "${SPECULATOR:-mtp}"
+      MTP_DEPTH: "${MTP_DEPTH:-0}"
+      DFLASH_DEPTH: "${DFLASH_DEPTH:-2}"
+      DFLASH_MODEL: "${DFLASH_MODEL:-local-inference-lab/GLM-5.3-Flash-DFlash2}"
+      DFLASH_KV_CACHE_DTYPE: "${DFLASH_KV_CACHE_DTYPE:-auto}"
+      DFLASH_ATTENTION_BACKEND: "${DFLASH_ATTENTION_BACKEND:-FLASH_ATTN}"
+      MTP_ATTENTION_BACKEND: "${MTP_ATTENTION_BACKEND:-B12X}"
+      MTP_MOE_BACKEND: "${MTP_MOE_BACKEND:-humming}"
+
+      MAX_MODEL_LEN: "${MAX_MODEL_LEN:-202752}"
+      MAX_NUM_SEQS: "${MAX_NUM_SEQS:-96}"
+      MAX_NUM_BATCHED_TOKENS: "${MAX_NUM_BATCHED_TOKENS:-4096}"
+      LMCACHE_TARGET_TOKEN_BUDGET: "${TARGET_TOKEN_BUDGET:-4096}"
+      LMCACHE_CHUNK_SIZE: "${LMCACHE_CHUNK_SIZE:-4096}"
+      VLLM_GLM53_SPLIT_TARGET_BLOCK_SIZE: "${GLM53_TARGET_BLOCK_SIZE:-auto}"
+      VLLM_GLM53_SPLIT_MAMBA_BLOCK_SIZE: "${GLM53_MAMBA_BLOCK_SIZE:-auto}"
+      PREFILL_SCHEDULE_INTERVAL: "${PREFILL_SCHEDULE_INTERVAL:-8}"
+      GPU_MEMORY_UTILIZATION: "${GPU_MEMORY_UTILIZATION:-0.93}"
+
+      # vram: vLLM APC in VRAM only.
+      # native: vLLM APC plus its DRAM KV-offload tier.
+      # lmcache: vLLM APC plus LMCache DRAM L1 and persistent filesystem L2.
+      CACHE_MODE: "${CACHE_MODE:-lmcache}"
+      KV_OFFLOAD_GIB: "${KV_OFFLOAD_GIB:-64}"
+      LMCACHE_L1_SIZE_GB: "${LMCACHE_L1_SIZE_GB:-64}"
+      LMCACHE_L1_INIT_SIZE_GB: "${LMCACHE_L1_INIT_SIZE_GB:-2}"
+      LMCACHE_L2_MAX_CAPACITY_GB: "${LMCACHE_L2_MAX_CAPACITY_GB:-512}"
+      LMCACHE_L2_WORKERS: "${LMCACHE_L2_WORKERS:-8}"
+      LMCACHE_MP_PORT: "${LMCACHE_MP_PORT:-5555}"
+      LMCACHE_HTTP_PORT: "${LMCACHE_HTTP_PORT:-8085}"
+      LMCACHE_PROMETHEUS_PORT: "${LMCACHE_PROMETHEUS_PORT:-9095}"
+      LMCACHE_STARTUP_TIMEOUT_SECONDS: "${LMCACHE_STARTUP_TIMEOUT_SECONDS:-900}"
+      LMCACHE_TRANSFER_MODE: "${LMCACHE_TRANSFER_MODE:-lmcache_driven}"
+
+      LOAD_FORMAT: "${LOAD_FORMAT:-instanttensor}"
+      INSTANTTENSOR_COPY: "${INSTANTTENSOR_COPY:-0}"
+      INSTANTTENSOR_DISTRIBUTED: "${INSTANTTENSOR_DISTRIBUTED:-0}"
+      GLM53_KDA_PREFILL_BACKEND: "${GLM53_KDA_PREFILL_BACKEND:-flashkda}"
+      VLLM_SERVER_DEV_MODE: "${VLLM_SERVER_DEV_MODE:-1}"
+
+    entrypoint: ["/bin/bash", "-lc"]
+    command:
+      - |
+        set -euo pipefail
+
+        case "$${TP}:$${DCP}" in
+          4:1|4:2|4:4|8:1|8:2|8:4|8:8) ;;
+          *) echo "DCP must divide TP; supported shapes are TP4/DCP1,2,4 and TP8/DCP1,2,4,8" >&2; exit 2 ;;
+        esac
+
+        case "$${KV_CACHE_QUANT}" in
+          fp8_ds_mla) kv_dtype=fp8 ;;
+          nvfp4_ds_mla) kv_dtype=nvfp4_ds_mla ;;
+          *) echo "KV_CACHE_QUANT must be fp8_ds_mla or nvfp4_ds_mla" >&2; exit 2 ;;
+        esac
+
+        case "$${SPECULATOR}" in
+          mtp)
+            case "$${MTP_DEPTH}" in 0|1|2|3|4|5) ;; *) echo "MTP_DEPTH must be 0..5" >&2; exit 2 ;; esac
+            export NUM_SPECULATIVE_TOKENS="$${MTP_DEPTH}"
+            ;;
+          dflash2)
+            case "$${DFLASH_DEPTH}" in 1|2|3|4|5|6|7) ;; *) echo "DFLASH_DEPTH must be 1..7" >&2; exit 2 ;; esac
+            export NUM_SPECULATIVE_TOKENS="$${DFLASH_DEPTH}"
+            ;;
+          *) echo "SPECULATOR must be mtp or dflash2" >&2; exit 2 ;;
+        esac
+
+        if [ "$${LMCACHE_TARGET_TOKEN_BUDGET}" != "$${LMCACHE_CHUNK_SIZE}" ]; then
+          echo "TARGET_TOKEN_BUDGET and LMCACHE_CHUNK_SIZE must match" >&2
+          exit 2
+        fi
+
+        extra_args=(--kv-cache-dtype "$${kv_dtype}")
+        if [ "$${LOAD_FORMAT}" = instanttensor ]; then
+          case "$${INSTANTTENSOR_COPY}:$${INSTANTTENSOR_DISTRIBUTED}" in
+            0:0) loader_json='{"instanttensor_copy":false,"instanttensor_distributed":false}' ;;
+            0:1) loader_json='{"instanttensor_copy":false,"instanttensor_distributed":true}' ;;
+            1:0) loader_json='{"instanttensor_copy":true,"instanttensor_distributed":false}' ;;
+            1:1) loader_json='{"instanttensor_copy":true,"instanttensor_distributed":true}' ;;
+            *) echo "INSTANTTENSOR_COPY and INSTANTTENSOR_DISTRIBUTED must be 0 or 1" >&2; exit 2 ;;
+          esac
+          extra_args+=(--model-loader-extra-config "$${loader_json}")
+        fi
+
+        namespace="r12-auto1024-$${KV_CACHE_QUANT}-tp$${TP}-dcp$${DCP}-gather$${DCP_CKV_GATHER}-$${SPECULATOR}$${NUM_SPECULATIVE_TOKENS}-bt$${LMCACHE_CHUNK_SIZE}"
+        export LMCACHE_INSTANCE_ID="$${LMCACHE_INSTANCE_ID:-$${namespace}}"
+        export LMCACHE_CUMEM_BROKER_DIR="/cache/lmcache-cumem-$${namespace}"
+
+        case "$${CACHE_MODE}" in
+          vram)
+            export LMCACHE_ENABLED=0
+            ;;
+          native)
+            export LMCACHE_ENABLED=0
+            # Native offload pins/registers KV memory; CuMem prevents PyTorch's
+            # expandable allocator from remapping those virtual addresses.
+            extra_args+=(--kv-offloading-size "$${KV_OFFLOAD_GIB}" --kv-offloading-backend native --enable-cumem-allocator)
+            ;;
+          lmcache)
+            export LMCACHE_ENABLED=1
+            export LMCACHE_L2_ENABLED=1
+            export LMCACHE_L2_PATH="/lmcache-root/$${namespace}"
+            ;;
+          *) echo "CACHE_MODE must be vram, native, or lmcache" >&2; exit 2 ;;
+        esac
+
+        echo "r12 auto-cache: quant=$${KV_CACHE_QUANT} TP=$${TP} DCP=$${DCP} gather=$${DCP_CKV_GATHER} spec=$${SPECULATOR}$${NUM_SPECULATIVE_TOKENS} cache=$${CACHE_MODE} budget=$${LMCACHE_TARGET_TOKEN_BUDGET}"
+        exec /usr/local/bin/serve-glm53-flash-lmcache.sh "$${extra_args[@]}"
+
+    volumes:
+      - "${GLM53_MODEL_DIR:-/home/agent/models/GLM-5.3-Flash-NVFP4}:/model:ro"
+      - "${LMCACHE_ROOT_DIR:-./glm53-r12-auto1024-lmcache}:/lmcache-root"
+      - "glm53-r12-cache-auto1024-hf:/root/.cache/huggingface"
+      - "glm53-r12-cache-auto1024-jit:/cache"
+
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:$${PORT:-8000}/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 20m
+
+    stop_grace_period: 2m
+
+volumes:
+  glm53-r12-cache-auto1024-hf:
+  glm53-r12-cache-auto1024-jit:

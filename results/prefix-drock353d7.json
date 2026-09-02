@@ -1,0 +1,13 @@
+{
+  "label": "drock353d7-candidate",
+  "tokens_approx": 24000,
+  "phases": {
+    "cold": 1424.1284999297932,
+    "warm": 770.3141439706087,
+    "restart": 1031.653170939535
+  },
+  "ratios": {
+    "warm_over_cold": 0.541,
+    "restart_over_cold": 0.724
+  }
+}
