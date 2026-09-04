@@ -1,0 +1,55 @@
+{
+  "label": "ram-only",
+  "runs": [
+    {
+      "run": 1,
+      "prompt_tokens": 33297,
+      "seconds": 4.263737574001425,
+      "tokens_per_second": 7809.345538297633
+    },
+    {
+      "run": 2,
+      "prompt_tokens": 33297,
+      "seconds": 3.946321095001622,
+      "tokens_per_second": 8437.478653770397
+    },
+    {
+      "run": 3,
+      "prompt_tokens": 33297,
+      "seconds": 3.762766472002113,
+      "tokens_per_second": 8849.074277597449
+    },
+    {
+      "run": 4,
+      "prompt_tokens": 33297,
+      "seconds": 3.7777231549989665,
+      "tokens_per_second": 8814.039206641946
+    },
+    {
+      "run": 5,
+      "prompt_tokens": 33297,
+      "seconds": 3.965120676999504,
+      "tokens_per_second": 8397.474556864328
+    },
+    {
+      "run": 6,
+      "prompt_tokens": 33297,
+      "seconds": 3.7792142639991653,
+      "tokens_per_second": 8810.561580799367
+    },
+    {
+      "run": 7,
+      "prompt_tokens": 33297,
+      "seconds": 3.7682478119968437,
+      "tokens_per_second": 8836.202304422088
+    },
+    {
+      "run": 8,
+      "prompt_tokens": 33297,
+      "seconds": 3.731274816000223,
+      "tokens_per_second": 8923.759744851239
+    }
+  ],
+  "median_tokens_per_second": 8812.300393720656,
+  "aggregate_tokens_per_second": 8594.325090799774
+}

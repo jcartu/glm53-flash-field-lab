@@ -1,0 +1,65 @@
+{
+  "needle_code": "SILVER-CEDAR-48291",
+  "results": [
+    {
+      "label": "cold",
+      "wall_seconds": 77.05292510986328,
+      "prompt_tokens": 951532,
+      "completion_tokens": 12,
+      "hit": true,
+      "content": "SILVER-CEDAR-48291",
+      "reasoning_content": "",
+      "finish_reason": "stop"
+    },
+    {
+      "label": "warm-1",
+      "wall_seconds": 3.761187791824341,
+      "prompt_tokens": 951532,
+      "completion_tokens": 12,
+      "hit": true,
+      "content": "SILVER-CEDAR-48291",
+      "reasoning_content": "",
+      "finish_reason": "stop"
+    },
+    {
+      "label": "warm-2",
+      "wall_seconds": 3.508079767227173,
+      "prompt_tokens": 951532,
+      "completion_tokens": 12,
+      "hit": true,
+      "content": "SILVER-CEDAR-48291",
+      "reasoning_content": "",
+      "finish_reason": "stop"
+    },
+    {
+      "label": "warm-3",
+      "wall_seconds": 3.504474639892578,
+      "prompt_tokens": 951532,
+      "completion_tokens": 12,
+      "hit": true,
+      "content": "SILVER-CEDAR-48291",
+      "reasoning_content": "",
+      "finish_reason": "stop"
+    },
+    {
+      "label": "restart-1",
+      "wall_seconds": 12.665267705917358,
+      "prompt_tokens": 951532,
+      "completion_tokens": 12,
+      "hit": true,
+      "content": "SILVER-CEDAR-48291",
+      "reasoning_content": "",
+      "finish_reason": "stop"
+    },
+    {
+      "label": "restart-2",
+      "wall_seconds": 3.6648061275482178,
+      "prompt_tokens": 951532,
+      "completion_tokens": 22,
+      "hit": true,
+      "content": "SILVER-CEDAR-48291",
+      "reasoning_content": "",
+      "finish_reason": "stop"
+    }
+  ]
+}

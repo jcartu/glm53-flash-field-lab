@@ -1,0 +1,55 @@
+{
+  "label": "lmcache",
+  "runs": [
+    {
+      "run": 1,
+      "prompt_tokens": 33297,
+      "seconds": 4.186225141998875,
+      "tokens_per_second": 7953.943916189147
+    },
+    {
+      "run": 2,
+      "prompt_tokens": 33297,
+      "seconds": 3.703412610997475,
+      "tokens_per_second": 8990.896639797262
+    },
+    {
+      "run": 3,
+      "prompt_tokens": 33297,
+      "seconds": 3.6922425830016437,
+      "tokens_per_second": 9018.096523043425
+    },
+    {
+      "run": 4,
+      "prompt_tokens": 33297,
+      "seconds": 3.7476014280000527,
+      "tokens_per_second": 8884.882941719152
+    },
+    {
+      "run": 5,
+      "prompt_tokens": 33297,
+      "seconds": 3.6921420880025835,
+      "tokens_per_second": 9018.341983153034
+    },
+    {
+      "run": 6,
+      "prompt_tokens": 33297,
+      "seconds": 3.667661544001021,
+      "tokens_per_second": 9078.536718978869
+    },
+    {
+      "run": 7,
+      "prompt_tokens": 33297,
+      "seconds": 3.682042417000048,
+      "tokens_per_second": 9043.078875535824
+    },
+    {
+      "run": 8,
+      "prompt_tokens": 33297,
+      "seconds": 3.773618131002877,
+      "tokens_per_second": 8823.627310469537
+    }
+  ],
+  "median_tokens_per_second": 9004.496581420342,
+  "aggregate_tokens_per_second": 8836.506142515695
+}

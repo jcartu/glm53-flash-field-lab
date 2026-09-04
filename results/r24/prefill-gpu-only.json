@@ -1,0 +1,55 @@
+{
+  "label": "gpu-only",
+  "runs": [
+    {
+      "run": 1,
+      "prompt_tokens": 33297,
+      "seconds": 3.35552668499804,
+      "tokens_per_second": 9923.032395738332
+    },
+    {
+      "run": 2,
+      "prompt_tokens": 33297,
+      "seconds": 3.233214929998212,
+      "tokens_per_second": 10298.418360952704
+    },
+    {
+      "run": 3,
+      "prompt_tokens": 33297,
+      "seconds": 3.219019857002422,
+      "tokens_per_second": 10343.831811900172
+    },
+    {
+      "run": 4,
+      "prompt_tokens": 33297,
+      "seconds": 3.22853897800087,
+      "tokens_per_second": 10313.33374844918
+    },
+    {
+      "run": 5,
+      "prompt_tokens": 33297,
+      "seconds": 3.2280917940006475,
+      "tokens_per_second": 10314.762443212394
+    },
+    {
+      "run": 6,
+      "prompt_tokens": 33297,
+      "seconds": 3.194087137999304,
+      "tokens_per_second": 10424.574709898618
+    },
+    {
+      "run": 7,
+      "prompt_tokens": 33297,
+      "seconds": 3.198182693002309,
+      "tokens_per_second": 10411.225122584316
+    },
+    {
+      "run": 8,
+      "prompt_tokens": 33297,
+      "seconds": 3.2001075410007616,
+      "tokens_per_second": 10404.962824964037
+    }
+  ],
+  "median_tokens_per_second": 10329.297127556283,
+  "aggregate_tokens_per_second": 10301.98296059156
+}

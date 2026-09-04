@@ -1,0 +1,55 @@
+{
+  "label": "fresh-l2",
+  "runs": [
+    {
+      "run": 1,
+      "prompt_tokens": 33297,
+      "seconds": 4.280566090998036,
+      "tokens_per_second": 7778.644060658957
+    },
+    {
+      "run": 2,
+      "prompt_tokens": 33297,
+      "seconds": 3.731941330999689,
+      "tokens_per_second": 8922.1659846085
+    },
+    {
+      "run": 3,
+      "prompt_tokens": 33297,
+      "seconds": 3.8637386369991873,
+      "tokens_per_second": 8617.818938669325
+    },
+    {
+      "run": 4,
+      "prompt_tokens": 33297,
+      "seconds": 3.720660388000397,
+      "tokens_per_second": 8949.21775375873
+    },
+    {
+      "run": 5,
+      "prompt_tokens": 33297,
+      "seconds": 3.8130405159972725,
+      "tokens_per_second": 8732.401310792633
+    },
+    {
+      "run": 6,
+      "prompt_tokens": 33297,
+      "seconds": 3.9057844019989716,
+      "tokens_per_second": 8525.048126813828
+    },
+    {
+      "run": 7,
+      "prompt_tokens": 33297,
+      "seconds": 4.027042847999837,
+      "tokens_per_second": 8268.350066485646
+    },
+    {
+      "run": 8,
+      "prompt_tokens": 33297,
+      "seconds": 3.9589655270028743,
+      "tokens_per_second": 8410.530420861587
+    }
+  ],
+  "median_tokens_per_second": 8571.433532741576,
+  "aggregate_tokens_per_second": 8509.94232948765
+}

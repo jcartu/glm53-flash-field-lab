@@ -1,7 +1,7 @@
 # GLM-5.3-Flash Field Lab
 
 Independent validation harness and results for GLM-5.3-Flash serving stacks on
-4x RTX PRO 6000 Blackwell (SM120, single-root PCIe, 251 GB host RAM).
+4x RTX PRO 6000 Blackwell (SM120, single-root PCIe 5, 256 GB host RAM).
 
 Everything here was built to answer one question the hard way: **what actually
 holds up when you run it for real?** Speed matrices, restart persistence,
@@ -25,6 +25,7 @@ measurements — all reproducible from this repo.
 
 | File | What it shows |
 |---|---|
+| `results/r24/` | Full R24 battery: 16 runtime configs, DCP1/2/4, three speculators, FP8/NVFP4 KV, GPU/LMCache/native modes, 1M needles and replay, fairness, corruption, tool ordering, Estonia/Lavd, charts |
 | `results/bench-r15.json` | JJ r15 — C16 1,130 t/s, decode flat to 128k (record on this host) |
 | `results/collision-r15.json` | 90% decode stall during one cold 65k prefill (fairness finding) |
 | `results/bench-r7-control-mxfp8.json` | r7 control — cross-validated vs CN4 within +-5% |

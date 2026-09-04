@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "label": "cold",
+      "wall_seconds": 123.85576295852661,
+      "prompt_tokens": 951542,
+      "completion_tokens": 45,
+      "needle_hit": true,
+      "finish_reason": "stop"
+    },
+    {
+      "label": "warm",
+      "wall_seconds": 4.332317113876343,
+      "prompt_tokens": 951542,
+      "completion_tokens": 219,
+      "needle_hit": false,
+      "finish_reason": "stop"
+    },
+    {
+      "label": "restart",
+      "wall_seconds": 12.925913095474243,
+      "prompt_tokens": 951542,
+      "completion_tokens": 137,
+      "needle_hit": true,
+      "finish_reason": "stop"
+    }
+  ]
+}
