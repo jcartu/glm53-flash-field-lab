@@ -1,0 +1,260 @@
+{
+  "waves": 3,
+  "clean": 23,
+  "total": 24,
+  "flagged": 1,
+  "flagged_results": [
+    {
+      "wave": 1,
+      "topic": "the design of the Apollo guidance computer",
+      "verdict": "RUNAWAY(repetition)",
+      "finish": "length",
+      "completion_tokens": 8192,
+      "reasoning_tokens": 0,
+      "visible_chars": 38119,
+      "reasoning_chars": 0
+    }
+  ],
+  "results": [
+    {
+      "wave": 1,
+      "topic": "the history of the transcontinental railroad",
+      "verdict": "CLEAN",
+      "finish": "stop",
+      "completion_tokens": 4529,
+      "reasoning_tokens": 0,
+      "visible_chars": 23307,
+      "reasoning_chars": 0
+    },
+    {
+      "wave": 1,
+      "topic": "how a modern CPU pipeline works",
+      "verdict": "CLEAN",
+      "finish": "stop",
+      "completion_tokens": 2829,
+      "reasoning_tokens": 10,
+      "visible_chars": 14791,
+      "reasoning_chars": 0
+    },
+    {
+      "wave": 1,
+      "topic": "the economics of medieval Venetian trade",
+      "verdict": "CLEAN",
+      "finish": "stop",
+      "completion_tokens": 2030,
+      "reasoning_tokens": 13,
+      "visible_chars": 10179,
+      "reasoning_chars": 0
+    },
+    {
+      "wave": 1,
+      "topic": "the biochemistry of photosynthesis",
+      "verdict": "CLEAN",
+      "finish": "stop",
+      "completion_tokens": 1464,
+      "reasoning_tokens": 0,
+      "visible_chars": 6775,
+      "reasoning_chars": 0
+    },
+    {
+      "wave": 1,
+      "topic": "the design of the Apollo guidance computer",
+      "verdict": "RUNAWAY(repetition)",
+      "finish": "length",
+      "completion_tokens": 8192,
+      "reasoning_tokens": 0,
+      "visible_chars": 38119,
+      "reasoning_chars": 0
+    },
+    {
+      "wave": 1,
+      "topic": "how TLS 1.3 handshake works",
+      "verdict": "CLEAN",
+      "finish": "stop",
+      "completion_tokens": 1668,
+      "reasoning_tokens": 0,
+      "visible_chars": 7411,
+      "reasoning_chars": 0
+    },
+    {
+      "wave": 1,
+      "topic": "the geology of the Icelandic rift",
+      "verdict": "CLEAN",
+      "finish": "stop",
+      "completion_tokens": 1252,
+      "reasoning_tokens": 26,
+      "visible_chars": 5639,
+      "reasoning_chars": 0
+    },
+    {
+      "wave": 1,
+      "topic": "the evolution of compiler optimization",
+      "verdict": "CLEAN",
+      "finish": "stop",
+      "completion_tokens": 2230,
+      "reasoning_tokens": 46,
+      "visible_chars": 11967,
+      "reasoning_chars": 0
+    },
+    {
+      "wave": 2,
+      "topic": "the history of the transcontinental railroad",
+      "verdict": "CLEAN",
+      "finish": "stop",
+      "completion_tokens": 1169,
+      "reasoning_tokens": 12,
+      "visible_chars": 5796,
+      "reasoning_chars": 0
+    },
+    {
+      "wave": 2,
+      "topic": "how a modern CPU pipeline works",
+      "verdict": "CLEAN",
+      "finish": "stop",
+      "completion_tokens": 1941,
+      "reasoning_tokens": 74,
+      "visible_chars": 9460,
+      "reasoning_chars": 0
+    },
+    {
+      "wave": 2,
+      "topic": "the economics of medieval Venetian trade",
+      "verdict": "CLEAN",
+      "finish": "stop",
+      "completion_tokens": 2637,
+      "reasoning_tokens": 46,
+      "visible_chars": 13096,
+      "reasoning_chars": 0
+    },
+    {
+      "wave": 2,
+      "topic": "the biochemistry of photosynthesis",
+      "verdict": "CLEAN",
+      "finish": "stop",
+      "completion_tokens": 4602,
+      "reasoning_tokens": 0,
+      "visible_chars": 21603,
+      "reasoning_chars": 0
+    },
+    {
+      "wave": 2,
+      "topic": "the design of the Apollo guidance computer",
+      "verdict": "CLEAN",
+      "finish": "stop",
+      "completion_tokens": 1656,
+      "reasoning_tokens": 0,
+      "visible_chars": 8854,
+      "reasoning_chars": 0
+    },
+    {
+      "wave": 2,
+      "topic": "how TLS 1.3 handshake works",
+      "verdict": "CLEAN",
+      "finish": "stop",
+      "completion_tokens": 2127,
+      "reasoning_tokens": 15,
+      "visible_chars": 9642,
+      "reasoning_chars": 0
+    },
+    {
+      "wave": 2,
+      "topic": "the geology of the Icelandic rift",
+      "verdict": "CLEAN",
+      "finish": "stop",
+      "completion_tokens": 1378,
+      "reasoning_tokens": 35,
+      "visible_chars": 6235,
+      "reasoning_chars": 0
+    },
+    {
+      "wave": 2,
+      "topic": "the evolution of compiler optimization",
+      "verdict": "CLEAN",
+      "finish": "stop",
+      "completion_tokens": 2869,
+      "reasoning_tokens": 28,
+      "visible_chars": 14615,
+      "reasoning_chars": 0
+    },
+    {
+      "wave": 3,
+      "topic": "the history of the transcontinental railroad",
+      "verdict": "CLEAN",
+      "finish": "stop",
+      "completion_tokens": 1520,
+      "reasoning_tokens": 20,
+      "visible_chars": 7774,
+      "reasoning_chars": 0
+    },
+    {
+      "wave": 3,
+      "topic": "how a modern CPU pipeline works",
+      "verdict": "CLEAN",
+      "finish": "stop",
+      "completion_tokens": 3184,
+      "reasoning_tokens": 0,
+      "visible_chars": 16857,
+      "reasoning_chars": 0
+    },
+    {
+      "wave": 3,
+      "topic": "the economics of medieval Venetian trade",
+      "verdict": "CLEAN",
+      "finish": "stop",
+      "completion_tokens": 611,
+      "reasoning_tokens": 10,
+      "visible_chars": 2990,
+      "reasoning_chars": 0
+    },
+    {
+      "wave": 3,
+      "topic": "the biochemistry of photosynthesis",
+      "verdict": "CLEAN",
+      "finish": "stop",
+      "completion_tokens": 4113,
+      "reasoning_tokens": 0,
+      "visible_chars": 18917,
+      "reasoning_chars": 0
+    },
+    {
+      "wave": 3,
+      "topic": "the design of the Apollo guidance computer",
+      "verdict": "CLEAN",
+      "finish": "stop",
+      "completion_tokens": 1039,
+      "reasoning_tokens": 37,
+      "visible_chars": 5277,
+      "reasoning_chars": 0
+    },
+    {
+      "wave": 3,
+      "topic": "how TLS 1.3 handshake works",
+      "verdict": "CLEAN",
+      "finish": "stop",
+      "completion_tokens": 1694,
+      "reasoning_tokens": 12,
+      "visible_chars": 7464,
+      "reasoning_chars": 0
+    },
+    {
+      "wave": 3,
+      "topic": "the geology of the Icelandic rift",
+      "verdict": "CLEAN",
+      "finish": "stop",
+      "completion_tokens": 1337,
+      "reasoning_tokens": 0,
+      "visible_chars": 6324,
+      "reasoning_chars": 0
+    },
+    {
+      "wave": 3,
+      "topic": "the evolution of compiler optimization",
+      "verdict": "CLEAN",
+      "finish": "stop",
+      "completion_tokens": 3206,
+      "reasoning_tokens": 10,
+      "visible_chars": 17478,
+      "reasoning_chars": 0
+    }
+  ]
+}

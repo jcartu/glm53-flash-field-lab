@@ -1,0 +1,35 @@
+{
+  "label": "stock-coarse-2048",
+  "target_prompt_tokens": 52445,
+  "results": [
+    {
+      "label": "cold",
+      "wall_seconds": 6.028585617998033,
+      "prompt_tokens": 52445,
+      "completion_tokens": 12,
+      "hit": true,
+      "content": "COPPER-LANTERN-64625",
+      "reasoning_content": ""
+    },
+    {
+      "label": "repeat",
+      "wall_seconds": 6.7004335960009485,
+      "prompt_tokens": 52445,
+      "completion_tokens": 12,
+      "hit": true,
+      "content": "COPPER-LANTERN-64625",
+      "reasoning_content": ""
+    }
+  ],
+  "cold_metric_delta": {
+    "vllm:prefix_cache_hits_total": 0.0,
+    "vllm:prompt_tokens_by_source_total:local_compute": 52445.0,
+    "vllm:prompt_tokens_by_source_total:local_cache_hit": 0.0
+  },
+  "repeat_metric_delta": {
+    "vllm:prefix_cache_hits_total": 0.0,
+    "vllm:prompt_tokens_by_source_total:local_compute": 52445.0,
+    "vllm:prompt_tokens_by_source_total:local_cache_hit": 0.0
+  },
+  "outputs_identical": true
+}

@@ -1,0 +1,37 @@
+{
+  "results": [
+    {
+      "depth_percent": 10,
+      "identity": "R25-UNIQUE-DEPTH-10-25001",
+      "needle_code": "R25-NEEDLE-10-SILVER",
+      "wall_seconds": 119.39048711299984,
+      "prompt_tokens": 925612,
+      "completion_tokens": 24,
+      "hit": true,
+      "content": "R25-NEEDLE-10-SILVER",
+      "reasoning_content": ""
+    },
+    {
+      "depth_percent": 50,
+      "identity": "R25-UNIQUE-DEPTH-50-25001",
+      "needle_code": "R25-NEEDLE-50-SILVER",
+      "wall_seconds": 113.8231918370002,
+      "prompt_tokens": 925611,
+      "completion_tokens": 24,
+      "hit": true,
+      "content": "R25-NEEDLE-50-SILVER",
+      "reasoning_content": ""
+    },
+    {
+      "depth_percent": 90,
+      "identity": "R25-UNIQUE-DEPTH-90-25001",
+      "needle_code": "R25-NEEDLE-90-SILVER",
+      "wall_seconds": 114.65427860899945,
+      "prompt_tokens": 925611,
+      "completion_tokens": 13,
+      "hit": true,
+      "content": "R25-NEEDLE-90-SILVER",
+      "reasoning_content": ""
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+iSource clarification supplied by the user:
+Discord author: isource9608, user 798161842031427584, message 1545574482989813861.
+
+"What I referred to as hot request is the process of decoding - pre-filling - decoding in the agent session. After the decoding stage is completed, there will be a relatively small pre-filling step. However, this small pre-filling is likely to be blocked by a periodic large cold pre-filling, resulting in a very long queue and an inability to increase the number of concurrent decodings."
+
+D-Rock response supplied by the user:
+Discord author: drock01057, user 1500000773541593231, messages 1545575192430903408 and 1545575451596955749.
+
+"In the fairness engine the behavior you described is correct... it does not parallelize or prioritize jobs based on pending decode. But that's a really good idea. If decode is saturated then prioritize long prefills, and if decode is bare then prioritize short decodes."
+
+Additional option supplied by the user:
+
+"The other option would be proper interleaving of all prefill jobs in queue, the shorter ones would come out faster but backpressure would still rise."
+
+Field-test interpretation:
+
+R25 compute-share fairness protects aggregate execution time between decode and prefill. It does not claim priority or interleaving among queued prefill jobs. The dedicated hot-request benchmark therefore measures cyclic agent turns (decode, small incremental prefill, decode) at C8 and C16 while periodic unique 128K cold prefills arrive. It reports hot-turn TTFT with and without cold work pending, queue depth and area, completed turns, decode gaps, cold drain time, and total useful throughput for fairness off versus compute_share=0.4.

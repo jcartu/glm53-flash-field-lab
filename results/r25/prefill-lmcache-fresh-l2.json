@@ -1,0 +1,55 @@
+{
+  "label": "lmcache-fresh-l2",
+  "runs": [
+    {
+      "run": 1,
+      "prompt_tokens": 33297,
+      "seconds": 8.327415480001946,
+      "tokens_per_second": 3998.479489820318
+    },
+    {
+      "run": 2,
+      "prompt_tokens": 33297,
+      "seconds": 3.4386663740006043,
+      "tokens_per_second": 9683.114434059415
+    },
+    {
+      "run": 3,
+      "prompt_tokens": 33297,
+      "seconds": 3.4085947860003216,
+      "tokens_per_second": 9768.541610389255
+    },
+    {
+      "run": 4,
+      "prompt_tokens": 33297,
+      "seconds": 3.3362293430036516,
+      "tokens_per_second": 9980.428974352904
+    },
+    {
+      "run": 5,
+      "prompt_tokens": 33297,
+      "seconds": 3.4092948789984803,
+      "tokens_per_second": 9766.53565671661
+    },
+    {
+      "run": 6,
+      "prompt_tokens": 33297,
+      "seconds": 3.3533156780031277,
+      "tokens_per_second": 9929.575142125626
+    },
+    {
+      "run": 7,
+      "prompt_tokens": 33297,
+      "seconds": 3.4365806130008423,
+      "tokens_per_second": 9688.991398611442
+    },
+    {
+      "run": 8,
+      "prompt_tokens": 33297,
+      "seconds": 3.400838109999313,
+      "tokens_per_second": 9790.821827742551
+    }
+  ],
+  "median_tokens_per_second": 9767.538633552933,
+  "aggregate_tokens_per_second": 8295.49179487352
+}

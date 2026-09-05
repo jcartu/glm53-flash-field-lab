@@ -1,0 +1,11 @@
+{
+  "label": "r25-native",
+  "tokens_approx": 80000,
+  "phases": {
+    "cold": 11376.340025999525,
+    "warm": 987.2385100024985
+  },
+  "ratios": {
+    "warm_over_cold": 0.087
+  }
+}

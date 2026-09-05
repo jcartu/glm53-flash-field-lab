@@ -1,0 +1,10 @@
+{
+  "label": "R24",
+  "wall_seconds": 4.650609393000195,
+  "local_prompt_tokens": 1000000,
+  "server_prompt_tokens": 1000000,
+  "completion_tokens": 21,
+  "needle_hit": true,
+  "content": "SILVER-CEDAR-25001",
+  "reasoning_content": ""
+}

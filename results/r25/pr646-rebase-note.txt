@@ -1,0 +1,27 @@
+PR646 R25 field-test rebase
+
+Base
+- Published R25 image: sha256:89376e9aa49442a90754662ca1bb281bffbeca29bb7393e6e8281506e5ac4804
+- Exact packaged vLLM commit: d49385468458cf97dff0fc8d9c8863f8082abf4f
+- PR head at test start: b48e7531c, draft, GitHub merge state DIRTY
+
+Applied commits
+- 88fc8991e, production implementation and primary tests
+- b48e7531c, EAGLE-margin and attention-only tests
+- Local rebased commits: 30fe1342e and 427dae6b0
+
+Conflicts resolved
+- platforms/interface.py: retained R25's resolved mamba_block_size variable and accepted either divisor or multiple geometry.
+- single_type_kv_cache_manager.py: removed R25's block-aligned sliding-window fallback so PR646's fine-grained path is reachable.
+- Image launcher: allowed GLM53_MAMBA_BLOCK_SIZE to divide GLM53_TARGET_BLOCK_SIZE.
+
+Test rebase
+- R25 added Scheduler.drop_last_prefix_cache_block after the PR branch diverged. Three SimpleNamespace fixtures lacked it and initially caused four fixture AttributeErrors.
+- Added drop_last_prefix_cache_block=False to those three mocks.
+- Final focused prefix-cache file: 46 passed, 14 torch deprecation warnings, 0 failures.
+
+Derived test image
+- local/glm53-r25-pr646@sha256:70a158cd6825074c8a335b8783c06326132f1cb5a2a167efa47ea136da0e43b4
+- Local only, nine layers, never intended for publication or production.
+- Runtime scope is TP4/DCP1, DFlash2 K7, FP8 KV, target block 2048, recurrent block 256, prefix match unit 256.
+- DCP greater than one remains intentionally untested because the PR explicitly excludes it.

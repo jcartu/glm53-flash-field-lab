@@ -1,0 +1,727 @@
+{
+  "passed": false,
+  "checks_passed": 44,
+  "checks_total": 47,
+  "failed": [
+    {
+      "name": "corruption:lmcache-dflash-all-clean",
+      "passed": false,
+      "detail": [
+        {
+          "wave": 1,
+          "topic": "the design of the Apollo guidance computer",
+          "verdict": "RUNAWAY(repetition)",
+          "finish": "length",
+          "completion_tokens": 8192,
+          "reasoning_tokens": 0,
+          "visible_chars": 38119,
+          "reasoning_chars": 0
+        }
+      ]
+    },
+    {
+      "name": "quality:lavd",
+      "passed": false,
+      "detail": {
+        "waves": 2,
+        "attempted": 16,
+        "completed": 16,
+        "correct": 14,
+        "wrong": 2,
+        "errors": 0,
+        "exact": 14,
+        "fail": 2,
+        "aggregate_gen_tps": 185.41216439715416,
+        "aggregate_e2e_tps": 177.3487722263173
+      }
+    },
+    {
+      "name": "pr646:concurrent-estonia-parity",
+      "passed": false,
+      "detail": {
+        "patched": [
+          10,
+          12
+        ],
+        "stock": [
+          12,
+          12
+        ]
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "matrix:dcp1-vram-fp8-mtp0",
+      "passed": true,
+      "detail": [
+        1,
+        4,
+        8,
+        16
+      ]
+    },
+    {
+      "name": "matrix:dcp1-vram-fp8-mtp3",
+      "passed": true,
+      "detail": [
+        1,
+        4,
+        8,
+        16
+      ]
+    },
+    {
+      "name": "matrix:dcp1-vram-fp8-dflash2",
+      "passed": true,
+      "detail": [
+        1,
+        4,
+        8,
+        16
+      ]
+    },
+    {
+      "name": "matrix:dcp2-vram-fp8-mtp0",
+      "passed": true,
+      "detail": [
+        1,
+        4,
+        8,
+        16
+      ]
+    },
+    {
+      "name": "matrix:dcp2-vram-fp8-mtp3",
+      "passed": true,
+      "detail": [
+        1,
+        4,
+        8,
+        16
+      ]
+    },
+    {
+      "name": "matrix:dcp2-vram-fp8-dflash2",
+      "passed": true,
+      "detail": [
+        1,
+        4,
+        8,
+        16
+      ]
+    },
+    {
+      "name": "matrix:dcp4-vram-fp8-mtp0",
+      "passed": true,
+      "detail": [
+        1,
+        4,
+        8,
+        16
+      ]
+    },
+    {
+      "name": "matrix:dcp4-vram-fp8-mtp3",
+      "passed": true,
+      "detail": [
+        1,
+        4,
+        8,
+        16
+      ]
+    },
+    {
+      "name": "matrix:dcp4-vram-fp8-dflash2",
+      "passed": true,
+      "detail": [
+        1,
+        4,
+        8,
+        16
+      ]
+    },
+    {
+      "name": "matrix:dcp4-vram-nvfp4-mtp0",
+      "passed": true,
+      "detail": [
+        1,
+        4,
+        8,
+        16
+      ]
+    },
+    {
+      "name": "matrix:dcp4-vram-nvfp4-mtp3",
+      "passed": true,
+      "detail": [
+        1,
+        4,
+        8,
+        16
+      ]
+    },
+    {
+      "name": "matrix:dcp4-vram-nvfp4-dflash2",
+      "passed": true,
+      "detail": [
+        1,
+        4,
+        8,
+        16
+      ]
+    },
+    {
+      "name": "matrix:dcp4-lmcache-nvfp4-mtp0",
+      "passed": true,
+      "detail": [
+        1,
+        4,
+        8,
+        16
+      ]
+    },
+    {
+      "name": "matrix:dcp4-lmcache-nvfp4-mtp3",
+      "passed": true,
+      "detail": [
+        1,
+        4,
+        8,
+        16
+      ]
+    },
+    {
+      "name": "matrix:dcp4-lmcache-nvfp4-dflash2",
+      "passed": true,
+      "detail": [
+        1,
+        4,
+        8,
+        16
+      ]
+    },
+    {
+      "name": "matrix:dcp4-vram-nvfp4-mtp0-b12xkda",
+      "passed": true,
+      "detail": [
+        1,
+        4,
+        8,
+        16
+      ]
+    },
+    {
+      "name": "matrix:dcp4-vram-nvfp4-mtp0-ranklocal",
+      "passed": true,
+      "detail": [
+        1,
+        4,
+        8,
+        16
+      ]
+    },
+    {
+      "name": "matrix:dcp4-native-nvfp4-mtp0",
+      "passed": true,
+      "detail": [
+        1,
+        4,
+        8,
+        16
+      ]
+    },
+    {
+      "name": "execution:matched-r25-r24-r25-bracket",
+      "passed": true,
+      "detail": {
+        "C1": -1.8089129730364695,
+        "C8": -0.9296078974568189,
+        "C16": -1.4910881339501136
+      }
+    },
+    {
+      "name": "execution:dcp4-fp8-recheck",
+      "passed": true,
+      "detail": {
+        "mtp0": {
+          "prefill32": 9430.0,
+          "C1": 164.48487892592163,
+          "C4": 447.0934152075318,
+          "C8": 704.0545236594511,
+          "C16": 1058.967111958177,
+          "cpu_util_avg_pct": 12.18,
+          "power_total_avg_w": 1324.28,
+          "pcie_rx_avg_mb_s": 20402.58,
+          "pcie_tx_avg_mb_s": 18328.39
+        },
+        "mtp3": {
+          "prefill32": 9377.0,
+          "C1": 179.3936480894866,
+          "C4": 444.24017535762476,
+          "C8": 625.1514704013988,
+          "C16": 879.8060452282023,
+          "cpu_util_avg_pct": 12.26,
+          "power_total_avg_w": 1365.37,
+          "pcie_rx_avg_mb_s": 29271.42,
+          "pcie_tx_avg_mb_s": 26317.24
+        },
+        "dflash2": {
+          "prefill32": 9253.0,
+          "C1": 199.61712291535665,
+          "C4": 447.2753252874306,
+          "C8": 642.8359798297936,
+          "C16": 908.587030721733,
+          "cpu_util_avg_pct": 11.78,
+          "power_total_avg_w": 1382.7,
+          "pcie_rx_avg_mb_s": 35904.84,
+          "pcie_tx_avg_mb_s": 32223.47
+        }
+      }
+    },
+    {
+      "name": "collision:collision-dcp1-fair04.json",
+      "passed": true,
+      "detail": 3
+    },
+    {
+      "name": "collision:collision-dcp1-fair-off.json",
+      "passed": true,
+      "detail": 3
+    },
+    {
+      "name": "lmcache:unique-80k-cold-warm-restart",
+      "passed": true,
+      "detail": {
+        "target": 80000,
+        "labels": [
+          "cold",
+          "restart",
+          "warm"
+        ]
+      }
+    },
+    {
+      "name": "lmcache:shared-l2-cross-version-80k",
+      "passed": true,
+      "detail": {
+        "cold": 1191.7164200021944,
+        "warm": 1013.4906969979056,
+        "restart": 1129.4415119991754
+      }
+    },
+    {
+      "name": "native:80k-cold-warm",
+      "passed": true,
+      "detail": {
+        "cold": 11376.340025999525,
+        "warm": 987.2385100024985
+      }
+    },
+    {
+      "name": "corruption:dcp4-mtp3",
+      "passed": true,
+      "detail": "\"CLEAN\",\n      \"finish\": \"stop\",\n      \"completion_tokens\": 1283,\n      \"reasoning_tokens\": 9,\n      \"visible_chars\": 6886,\n      \"reasoning_chars\": 0\n    }\n  ],\n  \"summary\": \"8/8 CLEAN, 0 flagged\"\n}\n"
+    },
+    {
+      "name": "corruption:lmcache-dflash-three-waves",
+      "passed": true,
+      "detail": {
+        "clean": 23,
+        "flagged": 1,
+        "flagged_results": [
+          {
+            "wave": 1,
+            "topic": "the design of the Apollo guidance computer",
+            "verdict": "RUNAWAY(repetition)",
+            "finish": "length",
+            "completion_tokens": 8192,
+            "reasoning_tokens": 0,
+            "visible_chars": 38119,
+            "reasoning_chars": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "corruption:lmcache-dflash-all-clean",
+      "passed": false,
+      "detail": [
+        {
+          "wave": 1,
+          "topic": "the design of the Apollo guidance computer",
+          "verdict": "RUNAWAY(repetition)",
+          "finish": "length",
+          "completion_tokens": 8192,
+          "reasoning_tokens": 0,
+          "visible_chars": 38119,
+          "reasoning_chars": 0
+        }
+      ]
+    },
+    {
+      "name": "template:tool-order",
+      "passed": true,
+      "detail": "true,\n  \"temp_cited\": true,\n  \"none_leak\": false,\n  \"answer\": \"Here are the numbers I received:\\n\\n- **Population:** 13,960,000 \\u2014 which is **13.96 million**\\n- **Temperature:** **31\\u00b0C**\\n\\n**Comparison:** The temperature (31) is bigger than the population expressed in millions (13.96).\"\n}\n"
+    },
+    {
+      "name": "needle:unique-1m-depths",
+      "passed": true,
+      "detail": {
+        "results": [
+          {
+            "depth_percent": 10,
+            "identity": "R25-UNIQUE-DEPTH-10-25001",
+            "needle_code": "R25-NEEDLE-10-SILVER",
+            "wall_seconds": 119.39048711299984,
+            "prompt_tokens": 925612,
+            "completion_tokens": 24,
+            "hit": true,
+            "content": "R25-NEEDLE-10-SILVER",
+            "reasoning_content": ""
+          },
+          {
+            "depth_percent": 50,
+            "identity": "R25-UNIQUE-DEPTH-50-25001",
+            "needle_code": "R25-NEEDLE-50-SILVER",
+            "wall_seconds": 113.8231918370002,
+            "prompt_tokens": 925611,
+            "completion_tokens": 24,
+            "hit": true,
+            "content": "R25-NEEDLE-50-SILVER",
+            "reasoning_content": ""
+          },
+          {
+            "depth_percent": 90,
+            "identity": "R25-UNIQUE-DEPTH-90-25001",
+            "needle_code": "R25-NEEDLE-90-SILVER",
+            "wall_seconds": 114.65427860899945,
+            "prompt_tokens": 925611,
+            "completion_tokens": 13,
+            "hit": true,
+            "content": "R25-NEEDLE-90-SILVER",
+            "reasoning_content": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "needle:shared-l2-cross-version",
+      "passed": true,
+      "detail": "l=4.9s needle=HIT gen_tps~36.2 answer='ZEBRA-QUASAR-77341'\ndepth=50% prompt_tokens=951542 completion=125 wall=4.2s needle=HIT gen_tps~29.8 answer='ZEBRA-QUASAR-77341'\ndepth=90% prompt_tokens=951542 completion=160 wall=8.9s needle=HIT gen_tps~18.0 answer='ZEBRA-QUASAR-77341'\nSUMMARY: 3/3 needle hits\n"
+    },
+    {
+      "name": "quality:estonia",
+      "passed": true,
+      "detail": {
+        "attempted": 6,
+        "completed": 6,
+        "errors": 0,
+        "correct": 6,
+        "wrong": 0,
+        "score_counts": {
+          "pass": 6
+        },
+        "exact": 0,
+        "near": 0,
+        "fail": 0,
+        "correct_rate": 1.0,
+        "score_available": true,
+        "hit_max_tokens": 0,
+        "estimated_token_runs": 0,
+        "completion_tokens": {
+          "avg": 3807.8333333333335,
+          "min": 994.0,
+          "max": 6448.0,
+          "p50": 3199.5,
+          "p90": 6332.0,
+          "p99": 6436.4,
+          "std": 1935.3618452946266
+        },
+        "ttft": {
+          "avg": 3.789089972833002,
+          "min": 0.9277186350009288,
+          "max": 5.6049172329985595,
+          "p50": 4.335842848000539,
+          "p90": 5.26784018249964,
+          "p99": 5.5712095279486675,
+          "std": 1.6068978418132933
+        },
+        "elapsed": {
+          "avg": 25.91122966783223,
+          "min": 9.636170118999871,
+          "max": 39.61437966499943,
+          "p50": 23.754172753999228,
+          "p90": 38.597361688498495,
+          "p99": 39.51267786734934,
+          "std": 10.201504525388566
+        },
+        "gen_elapsed": {
+          "avg": 22.121632564833515,
+          "min": 5.887982701002329,
+          "max": 34.980615654003486,
+          "p50": 20.487008710999362,
+          "p90": 34.83196743250119,
+          "p99": 34.965750831853256,
+          "std": 10.240196711506734
+        },
+        "gen_tok_s": {
+          "avg": 169.56560223279092,
+          "min": 152.01387407123318,
+          "max": 185.91069559326343,
+          "p50": 170.4998114219767,
+          "p90": 181.80455590495995,
+          "p99": 185.50008162443308,
+          "std": 11.000851659246035
+        },
+        "e2e_tok_s": {
+          "avg": 138.98570352699963,
+          "min": 103.15301491410015,
+          "max": 165.40561862970765,
+          "p50": 138.8867760474758,
+          "p90": 164.0873981248739,
+          "p99": 165.27379657922427,
+          "std": 21.763813307753505
+        },
+        "aggregate_gen_tok_s": 172.13165991133036,
+        "aggregate_e2e_tok_s": 146.9568747661794
+      }
+    },
+    {
+      "name": "quality:lavd",
+      "passed": false,
+      "detail": {
+        "waves": 2,
+        "attempted": 16,
+        "completed": 16,
+        "correct": 14,
+        "wrong": 2,
+        "errors": 0,
+        "exact": 14,
+        "fail": 2,
+        "aggregate_gen_tps": 185.41216439715416,
+        "aggregate_e2e_tps": 177.3487722263173
+      }
+    },
+    {
+      "name": "lmcache:exact-1m-replay",
+      "passed": true,
+      "detail": {
+        "hit_count": 9,
+        "exact_output_count": 9,
+        "warm_median_seconds": 2.5542814529981115,
+        "restart_first_seconds": 3.138658222000231,
+        "restart_steady_median_seconds": 2.546211390501412
+      }
+    },
+    {
+      "name": "lmcache:eviction-byte-identity",
+      "passed": true,
+      "detail": {
+        "docs": 40,
+        "words_per_doc": 12000,
+        "identical_reply_count": 40,
+        "mismatch_count": 0,
+        "ground_truth_word_correct_p1": 0,
+        "ground_truth_word_correct_p2": 0,
+        "ttft_ratio_p2_over_p1": {
+          "median": 0.517,
+          "min": 0.299,
+          "max": 0.76
+        },
+        "mismatches": []
+      }
+    },
+    {
+      "name": "lmcache:cpu-only-sidecar",
+      "passed": true,
+      "detail": {
+        "lmcache_processes": [
+          {
+            "pid": 55540,
+            "command": "bash /usr/local/libexec/serve-glm53-flash-lmcache-cache-complete.sh",
+            "cuda_visible_devices": null,
+            "present_in_nvidia_smi": false
+          },
+          {
+            "pid": 56390,
+            "command": "/opt/venv/bin/python /opt/venv/bin/lmcache server --instance-id glm53-glm53-r18-cache-v1-tp4-dcp4-nvfp4_ds_mla --host 127.0.0.1 --port 5555 --chunk-size 4096 --max-workers 8 --max-gpu-workers 8 --max-cpu-workers 16 --hash-algorithm blake3 --supported-transfer-mode engine_driven --separate-object-groups --l1-size-gb 64 --l1-init-size-gb 2 --eviction-policy LRU --http-host 127.0.0.1 --http-port 8085 --prometheus-port 9095 --no-l1-use-lazy --shm-name lmcache-glm53-glm53-r18-cache-v1-tp4-dcp4-nvfp4_ds_mla-5555 --l2-adapter {\"type\":\"fs_native\",\"base_path\":\"/lmcache-l2/glm53-r18-cache-v1/_model-huggingface-main/kv-nvfp4_ds_mla/tp-4-dcp-4-i-4-g-1/spec-dflash2-7-draft-huggingface-main/chunk-4096\",\"num_workers\":8,\"use_odirect\":false,\"max_capacity_gb\":512,\"eviction\":{\"eviction_policy\":\"LRU\",\"trigger_watermark\":0.8,\"eviction_ratio\":0.2}}",
+            "cuda_visible_devices": null,
+            "present_in_nvidia_smi": false
+          },
+          {
+            "pid": 58309,
+            "command": "/opt/venv/bin/python /opt/venv/bin/vllm serve /model --served-model-name GLM-5.3-Flash-NVFP4 --host 0.0.0.0 --port 5001 --tensor-parallel-size 4 --pipeline-parallel-size 1 --decode-context-parallel-size 4 --cp-kv-cache-interleave-size 4 --dcp-kv-cache-interleave-size 4 --max-num-seqs 32 --max-model-len 1048576 --max-num-batched-tokens 4320 --prefill-schedule-interval 1 --max-cudagraph-capture-size 256 --gpu-memory-utilization 0.95 --mamba-cache-mode align --enable-chunked-prefill --dtype bfloat16 --kv-cache-dtype nvfp4_ds_mla --quantization modelopt_mixed --block-size 256 --load-format instanttensor --attention-backend B12X --moe-backend b12x --linear-backend b12x --no-enable-flashinfer-autotune --enable-auto-tool-choice --tool-call-parser glm47 --reasoning-parser glm45 --additional-config {\"glm53_kda_decode_backend\":\"auto\",\"kda_prefill_backend\":\"flashkda\"} --compilation-config {\"cudagraph_mode\":\"FULL_AND_PIECEWISE\"} --enable-prefix-caching --speculative-config {\"method\":\"dflash\",\"model\":\"/draft-mxfp8\",\"num_speculative_tokens\":7,\"draft_sample_method\":\"probabilistic\",\"rejection_sample_method\":\"standard\",\"kv_cache_dtype\":\"auto\",\"attention_backend\":\"FLASH_ATTN\"} --max-num-scheduled-tokens 4096 --prefix-cache-retention-interval 4096 --kv-transfer-config {\"kv_connector\":\"LMCacheMPConnector\",\"kv_connector_module_path\":\"lmcache.integration.vllm.lmcache_mp_connector\",\"kv_role\":\"kv_both\",\"kv_connector_extra_config\":{\"lmcache.mp.host\":\"127.0.0.1\",\"lmcache.mp.port\":5555,\"lmcache.mp.mp_transfer_mode\":\"engine_driven\"}} --fairness-engine compute_share --prefill-compute-share 0.4 --cudagraph-capture-sizes 1 2 4 8 16 32 40 48 64 96 128 192 256",
+            "cuda_visible_devices": null,
+            "present_in_nvidia_smi": false
+          }
+        ],
+        "lmcache_gpu_process_count": 0,
+        "verdict": "pass"
+      }
+    },
+    {
+      "name": "lmcache:matched-r24-r25-restore",
+      "passed": true,
+      "detail": {
+        "method": "matched exact 1,000,000-token filesystem-L2 restore, private 128 GiB SHM",
+        "cache_salt": "r25-exact-million-v1",
+        "arms": {
+          "R24": {
+            "label": "R24",
+            "wall_seconds": 4.650609393000195,
+            "local_prompt_tokens": 1000000,
+            "server_prompt_tokens": 1000000,
+            "completion_tokens": 21,
+            "needle_hit": true,
+            "content": "SILVER-CEDAR-25001",
+            "reasoning_content": "",
+            "retrieve_events": [
+              {
+                "tokens": 999424,
+                "seconds": 0.15
+              }
+            ],
+            "critical_retrieve_seconds": 0.15,
+            "max_retrieved_tokens": 999424,
+            "prefetch_ms": [
+              423.4
+            ],
+            "unpinned_fallback_warnings": 0
+          },
+          "R25": {
+            "label": "R25",
+            "wall_seconds": 3.8180153550056275,
+            "local_prompt_tokens": 1000000,
+            "server_prompt_tokens": 1000000,
+            "completion_tokens": 11,
+            "needle_hit": true,
+            "content": "SILVER-CEDAR-25001",
+            "reasoning_content": "",
+            "retrieve_events": [
+              {
+                "tokens": 999424,
+                "seconds": 0.029
+              }
+            ],
+            "critical_retrieve_seconds": 0.029,
+            "max_retrieved_tokens": 999424,
+            "prefetch_ms": [
+              279.0
+            ],
+            "unpinned_fallback_warnings": 0
+          }
+        },
+        "comparison": {
+          "critical_restore_speedup": 5.1724137931034475,
+          "critical_restore_reduction_pct": 80.66666666666666,
+          "api_wall_reduction_pct": 17.90290191319305,
+          "visible_output_identical": true
+        }
+      }
+    },
+    {
+      "name": "lmcache:r25-no-unpinned-fallback",
+      "passed": true,
+      "detail": 0
+    },
+    {
+      "name": "prefill:gpu-only",
+      "passed": true,
+      "detail": 8
+    },
+    {
+      "name": "prefill:lmcache-existing-l2",
+      "passed": true,
+      "detail": 8
+    },
+    {
+      "name": "prefill:lmcache-ram-only",
+      "passed": true,
+      "detail": 8
+    },
+    {
+      "name": "prefill:lmcache-fresh-l2",
+      "passed": true,
+      "detail": 8
+    },
+    {
+      "name": "hot-queue:off",
+      "passed": true,
+      "detail": {
+        "cells": 8
+      }
+    },
+    {
+      "name": "hot-queue:compute-share-0.4",
+      "passed": true,
+      "detail": {
+        "cells": 8
+      }
+    },
+    {
+      "name": "pr646:rebased-unit-tests",
+      "passed": true,
+      "detail": "/local/lib/python3.12/dist-packages/torch/jit/_script.py:365: DeprecationWarning: `torch.jit.script_method` is deprecated. Please switch to `torch.compile` or `torch.export`.\n    warnings.warn(\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n46 passed, 14 warnings in 16.30s\n"
+    },
+    {
+      "name": "pr646:three-arm-field-test",
+      "passed": true,
+      "detail": {
+        "arms": [
+          "pr646-decoupled-2048-256",
+          "stock-coarse-2048",
+          "stock-fine-256"
+        ],
+        "correctness": {
+          "prefix_outputs_identical_all_arms": true,
+          "needle_90k_hits": 4,
+          "needle_90k_total": 4,
+          "estonia_correct": 10,
+          "estonia_total": 12,
+          "estonia_errors": 0,
+          "estonia_waves": 2,
+          "stock_estonia_waves": 2,
+          "stock_estonia_correct": 12,
+          "stock_estonia_total": 12,
+          "stock_estonia_errors": 0
+        },
+        "comparison": {
+          "capacity_gain_vs_fine_256": 3.010628239335871,
+          "capacity_change_vs_stock_coarse": 0.0,
+          "fine_prefix_hit_change_vs_stock_coarse": 52224.0,
+          "throughput_delta_percent_vs_stock_coarse": {
+            "C16@0": -1.0027949048056706,
+            "C16@16384": -3.798546117099444,
+            "C1@0": 0.06254272326284838,
+            "C1@16384": -3.837396175579344,
+            "C1@32768": -4.885717330173489,
+            "C4@0": -5.569377835057388,
+            "C4@16384": -3.253202817549694,
+            "C4@32768": -1.6721346004560544,
+            "C8@0": -0.13832069133585811,
+            "C8@16384": -1.4671615127376247,
+            "C8@32768": -1.6458252519236383
+          },
+          "mean_absolute_throughput_delta_percent": 2.484819996361914,
+          "worst_throughput_delta_percent": -5.569377835057388,
+          "capacity_metric_note": "GPU KV cache size from server log is authoritative; llm-inference-bench num_blocks x public 256-token block undercounts heterogeneous 2048/256 geometry."
+        }
+      }
+    },
+    {
+      "name": "pr646:concurrent-estonia-parity",
+      "passed": false,
+      "detail": {
+        "patched": [
+          10,
+          12
+        ],
+        "stock": [
+          12,
+          12
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "target_prompt_tokens": 90000,
+  "results": [
+    {
+      "run": 1,
+      "wall_seconds": 10.372490362002281,
+      "prompt_tokens": 90000,
+      "completion_tokens": 20,
+      "hit": true,
+      "content": "VIOLET-COMET-64690",
+      "reasoning_content": ""
+    },
+    {
+      "run": 2,
+      "wall_seconds": 0.2523389030029648,
+      "prompt_tokens": 90000,
+      "completion_tokens": 23,
+      "hit": true,
+      "content": "VIOLET-COMET-64690",
+      "reasoning_content": ""
+    },
+    {
+      "run": 3,
+      "wall_seconds": 0.3373123389974353,
+      "prompt_tokens": 90000,
+      "completion_tokens": 55,
+      "hit": true,
+      "content": "VIOLET-COMET-64690",
+      "reasoning_content": ""
+    },
+    {
+      "run": 4,
+      "wall_seconds": 0.22796670000388985,
+      "prompt_tokens": 90000,
+      "completion_tokens": 20,
+      "hit": true,
+      "content": "VIOLET-COMET-64690",
+      "reasoning_content": ""
+    }
+  ]
+}

@@ -20,11 +20,14 @@ measurements — all reproducible from this repo.
 | `scripts/spec-matrix.sh` | Image x speculator x concurrency sweep for comparison charts |
 | `scripts/serve-lmcache-glm53.sh`, `scripts/serve-mp-sidecar.sh` | Two-arm LMCache test rigs (in-process + MP sidecar arrangements) |
 | `scripts/serve-glm53-flash-nvfp4.sh` | Production SGLang launcher (NVFP4 + DFlash2) |
+| `scripts/serve-r25-production.sh` | Pinned R25 production launcher: TP4/DCP4, DFlash K7, packed NVFP4 KV, LMCache, fairness 0.4, private 128 GiB SHM |
+| `scripts/r25/` | Reproducible R25 battery, matched R24 controls, cyclic agent hot-request workload, and isolated PR646 three-arm field test |
 
 ## Results index
 
 | File | What it shows |
 |---|---|
+| `results/r25/` | Full R25 battery: 18 configs, DCP1/2/4, private-SHM LMCache, exact 1M replay, R24 brackets, hot-request queue test, PR646 field test, seven charts, and all pass/fail receipts |
 | `results/r24/` | Full R24 battery: 16 runtime configs, DCP1/2/4, three speculators, FP8/NVFP4 KV, GPU/LMCache/native modes, 1M needles and replay, fairness, corruption, tool ordering, Estonia/Lavd, charts |
 | `results/bench-r15.json` | JJ r15 — C16 1,130 t/s, decode flat to 128k (record on this host) |
 | `results/collision-r15.json` | 90% decode stall during one cold 65k prefill (fairness finding) |

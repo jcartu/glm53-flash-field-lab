@@ -1,0 +1,35 @@
+{
+  "image": "voipmonitor/vllm:jovian-judgement-community-20260904-r25",
+  "digest": "sha256:89376e9aa49442a90754662ca1bb281bffbeca29bb7393e6e8281506e5ac4804",
+  "source_lock_path": "/opt/glm53-flash/source.lock",
+  "source_lock_sha256": "8d99c847855c32bb2348cd58f8a3a72f97df9c5fbeb38223f94a3bdfb590d9d0",
+  "filesystem_layers": 3,
+  "release_scope": "LMCache Python retrieve path only; vLLM and B12X byte-identical to R24",
+  "release_claims": {
+    "one_million_fs_replay_median_seconds": 1.041,
+    "r24_control_median_seconds": 1.274,
+    "discord_release_post_restart_seconds": 1.215,
+    "embedded_source_lock_restart_seconds": 1.311,
+    "restart_claim_note": "The mutable Discord post and immutable embedded source lock disagree by 96 ms; both claims are retained and the field battery measures independently.",
+    "cached_tokens": 999424,
+    "recomputed_tokens": 576
+  },
+  "rig": {
+    "gpus": 4,
+    "model": "NVIDIA RTX PRO 6000 Blackwell Workstation Edition",
+    "vram_mib_each": 97887,
+    "initial_state": "P8 idle, 4 MiB used per GPU",
+    "host_dev_shm": "126 GiB total, 62 GiB free"
+  },
+  "qualification_config": {
+    "tp": 4,
+    "dcp": 4,
+    "target_budget": 4096,
+    "max_num_seqs": 32,
+    "fairness": "compute_share:0.4",
+    "kv": "nvfp4_ds_mla",
+    "speculator": "DFlash2 depth 7",
+    "lmcache_chunk_tokens": 4096,
+    "private_shm_gib": 128
+  }
+}

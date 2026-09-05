@@ -1,0 +1,14 @@
+{
+  "docs": 40,
+  "words_per_doc": 12000,
+  "identical_reply_count": 40,
+  "mismatch_count": 0,
+  "ground_truth_word_correct_p1": 0,
+  "ground_truth_word_correct_p2": 0,
+  "ttft_ratio_p2_over_p1": {
+    "median": 0.517,
+    "min": 0.299,
+    "max": 0.76
+  },
+  "mismatches": []
+}

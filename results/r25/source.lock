@@ -1,0 +1,44 @@
+format=local-inference-source-overlay-lock/v1
+status=qualified
+release.name=jovian-judgement-community-20260904-r25
+release.base.image=voipmonitor/vllm
+release.base.digest=sha256:ab4ff9d6fef85c49d372714e89f014fcb66c6b247c0e3f341eb56dc798fdd0cd
+release.base.name=jovian-judgement-community-20260904-r24
+release.base.source-lock.path=/opt/glm53-flash/source.lock.r24
+release.base.source-lock.sha256=5ef0481267b0e672c13ffb2c8ffe914d927a02eb652f5112e1c0fbbea6e84d49
+release.rootfs.layers=3
+
+lmcache.repository=https://github.com/local-inference-lab/LMCache.git
+lmcache.ref=artifact/jovian-judgement-community-20260904-r25-lmcache-source
+lmcache.commit=cf52fc51418c6b0146e1fcea0690c25ef4e947a0
+lmcache.tree=f1f38f35c3e4975810d1e1c03d4fb8f845bf5cb3
+lmcache.package.tree=9cf07ca20e1dc7d11bb14e460662faa563f1c10d
+lmcache.base.commit=bf5ffa87
+lmcache.base.tree=311de681786928048d9975db07bc81c70141668d
+lmcache.base.package.tree=6685246954c3e83d95dc1c1deff2ec82b5d430cc
+lmcache.pr.43.head=b13fa35eb2a1e35ba2cfd4277a0b93bf1cfd322b
+lmcache.pr.45.head=415c5d60bd7b57e85f20c34a6f5a3e51f6018136
+lmcache.pr.47.head=8064a8e93ebbe7fddabfc0ad2ddcdee70885a02c
+lmcache.pr.48.head=65e09d45dc3d6f321fa56e41ca7657418c7d6ec6
+lmcache.overlay.files.sha256=417f180ac52935040972c6eda3ff059963c4ade22dfb577e1e0ac0807a3ee522
+lmcache.behavior=Engine-driven pinned-SHM retrieval reuses each reserved tensor view and references chunk hashes retained by the active lookup session; missing-registration prepare failures release exactly one lookup-owned reader share, and unregister owns pending-read cleanup before a rejected late commit; capability negotiation preserves the complete-key protocol for servers that do not advertise session references
+
+runtime.cache.modes=vram,native,lmcache
+runtime.lmcache.transfer.default=engine_driven
+runtime.lmcache.transfer.engine_driven=GPU gather and scatter execute in vLLM workers; the LMCache sidecar owns no CUDA context; asynchronous stores and pinned shared-memory restores avoid model-thread serialization
+runtime.lmcache.transfer.compatibility=A registration response without accepts_retrieve_session_reference disables compact keys and retains complete retrieve keys
+runtime.lmcache.kv-cache-dtype=fp8_ds_mla,nvfp4_ds_mla
+runtime.lmcache.chunk.tokens=4096
+
+qualification.hardware=Four NVIDIA RTX PRO 6000 Blackwell Workstation Edition GPUs, physical indices 4 through 7, at stock clocks
+qualification.long-prefix.conditions=TP4/DCP4, 4096-token scheduler budget, engine-driven pinned shared memory, CKV gather disabled to exercise the maximum-capacity DCP query-all-gather case, and deterministic cold, GPU-prefix, RAM-L1, and filesystem-L2 requests
+qualification.performance.conditions=TP4/DCP4 full-CKV prefill, 4096-token scheduler budget, automatic 1024-token target and recurrent pages, 16 NCCL channels, a 2097152-byte NCCL buffer, asynchronous engine-driven LMCache, and stock GPU clocks
+qualification.unit-tests=155 session, engine-driven transfer, missing-registration, and Blend tests passed; 6 device-specific tests were skipped
+qualification.modes=FP8 no-speculation, FP8 MTP3, FP8 DFlash2 K7, and NVFP4 no-speculation passed 50000-token tier qualification
+qualification.dflash=The FP8 DFlash2 runtime registered all nine hybrid cache groups and restored 49152 of 50025 prompt tokens from RAM-L1 and filesystem-L2
+qualification.long-prefix=Five 1000000-token filesystem-L2 replays restored 999424 tokens and recomputed 576 tokens in 1.028 to 1.048 seconds; median 1.041 seconds
+qualification.performance=The 1.041-second replay median is 18.3 percent below the 1.274-second base median and 14.4 percent below the 1.216-second single-view-only median
+qualification.full-ckv-performance=The release image measured 12394 prompt tokens per second for the 32k DFlash2 prefill cell and 81.1 verifier steps per second for context-zero DFlash2 decode; the R24 base measured 12397 prompt tokens per second and 81.45 verifier steps per second under matched conditions
+qualification.restart-l2=After restarting both vLLM and the LMCache sidecar, the release image restored 999424 of 1000000 prompt tokens from filesystem L2 in 1.311 seconds, recomputed 576 tokens, used zero local-prefix-cache tokens, and reproduced the reference greedy output
+qualification.transport=The profiled server restore completed in 53 ms; per-worker prepare RPC measured 13.7 to 15.9 ms, commit RPC measured 2.1 to 7.4 ms, and retrieve RPC plus GPU scatter measured 110 to 140 ms
+qualification.evidence=/opt/glm53-flash/source.lock identifies source; host evidence is under results/r25-release-qualification-20260904

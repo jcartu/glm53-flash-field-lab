@@ -1,0 +1,56 @@
+{
+  "method": "matched exact 1,000,000-token filesystem-L2 restore, private 128 GiB SHM",
+  "cache_salt": "r25-exact-million-v1",
+  "arms": {
+    "R24": {
+      "label": "R24",
+      "wall_seconds": 4.650609393000195,
+      "local_prompt_tokens": 1000000,
+      "server_prompt_tokens": 1000000,
+      "completion_tokens": 21,
+      "needle_hit": true,
+      "content": "SILVER-CEDAR-25001",
+      "reasoning_content": "",
+      "retrieve_events": [
+        {
+          "tokens": 999424,
+          "seconds": 0.15
+        }
+      ],
+      "critical_retrieve_seconds": 0.15,
+      "max_retrieved_tokens": 999424,
+      "prefetch_ms": [
+        423.4
+      ],
+      "unpinned_fallback_warnings": 0
+    },
+    "R25": {
+      "label": "R25",
+      "wall_seconds": 3.8180153550056275,
+      "local_prompt_tokens": 1000000,
+      "server_prompt_tokens": 1000000,
+      "completion_tokens": 11,
+      "needle_hit": true,
+      "content": "SILVER-CEDAR-25001",
+      "reasoning_content": "",
+      "retrieve_events": [
+        {
+          "tokens": 999424,
+          "seconds": 0.029
+        }
+      ],
+      "critical_retrieve_seconds": 0.029,
+      "max_retrieved_tokens": 999424,
+      "prefetch_ms": [
+        279.0
+      ],
+      "unpinned_fallback_warnings": 0
+    }
+  },
+  "comparison": {
+    "critical_restore_speedup": 5.1724137931034475,
+    "critical_restore_reduction_pct": 80.66666666666666,
+    "api_wall_reduction_pct": 17.90290191319305,
+    "visible_output_identical": true
+  }
+}

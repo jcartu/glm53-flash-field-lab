@@ -1,0 +1,15 @@
+format=local-field-test-overlay/v1
+base.image=voipmonitor/vllm@sha256:89376e9aa49442a90754662ca1bb281bffbeca29bb7393e6e8281506e5ac4804
+base.vllm.commit=d49385468458cf97dff0fc8d9c8863f8082abf4f
+pr.url=https://github.com/local-inference-lab/vllm/pull/646
+pr.head=b48e7531c
+pr.commits=88fc8991e,b48e7531c
+integration.commits=30fe1342e,427dae6b0
+integration.conflict.1=vllm/platforms/interface.py used R25 resolved mamba_block_size variable with PR divisor-or-multiple validation
+integration.conflict.2=vllm/v1/core/single_type_kv_cache_manager.py removed R25 block-aligned fallback so PR fine-grained sliding-window path is reachable
+test.rebase.fixture=added drop_last_prefix_cache_block=false to three SimpleNamespace scheduler mocks required by R25 base commit
+unit.tests=46 passed, 14 torch deprecation warnings
+launcher.patch=GLM53_MAMBA_BLOCK_SIZE accepts a divisor of GLM53_TARGET_BLOCK_SIZE
+runtime.geometry=target-2048,mamba-256,prefix-match-256
+runtime.scope=TP4,DCP1,DFlash2-depth7,FP8-KV
+warning=Draft PR, dirty merge state, DCP greater than one explicitly unmeasured by author; this image is field-test only

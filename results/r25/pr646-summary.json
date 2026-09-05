@@ -1,0 +1,285 @@
+{
+  "provenance": {
+    "pr": "https://github.com/local-inference-lab/vllm/pull/646",
+    "pr_state": "draft",
+    "pr_merge_state_at_test_start": "DIRTY",
+    "base_image": "voipmonitor/vllm@sha256:89376e9aa49442a90754662ca1bb281bffbeca29bb7393e6e8281506e5ac4804",
+    "patched_image": "local/glm53-r25-pr646@sha256:70a158cd6825074c8a335b8783c06326132f1cb5a2a167efa47ea136da0e43b4",
+    "patched_image_id": "sha256:70a158cd6825074c8a335b8783c06326132f1cb5a2a167efa47ea136da0e43b4",
+    "patched_image_layers": 9,
+    "rebased_unit_tests": "46 passed",
+    "scope": "TP4 DCP1 DFlash2 K7 FP8 KV only; DCP greater than one not tested"
+  },
+  "arms": {
+    "stock-fine-256": {
+      "kv_capacity_tokens": 1010045,
+      "prefill32_tokens_per_second": 8719.0,
+      "cells": {
+        "C1@0": 231.68755355741982,
+        "C1@16384": 223.541416002492,
+        "C1@32768": 209.1559524522118,
+        "C4@0": 510.52465380159816,
+        "C8@0": 724.4559515058949,
+        "C16@0": 1043.9031420286246,
+        "C4@16384": 511.3040385693267,
+        "C8@16384": 741.2918830396463,
+        "C16@16384": 1059.0332199045538,
+        "C4@32768": 519.0562682151127,
+        "C8@32768": 752.0030125158887,
+        "C16@32768": 1078.3217220236772
+      },
+      "hardware": {
+        "samples": 203,
+        "duration_seconds": 490.143,
+        "gpu_count": 4,
+        "cpu_util_avg_pct": 10.71,
+        "cpu_temp_max_c": 43.5,
+        "gpu_util_avg_pct": 90.65,
+        "gpu_util_max_pct": 100.0,
+        "mem_util_avg_pct": 57.35,
+        "mem_util_max_pct": 75.0,
+        "temp_avg_c": 46.46,
+        "temp_max_c": 54.0,
+        "power_total_avg_w": 1470.47,
+        "power_total_max_w": 1752.22,
+        "power_limit_total_w": 2400.0,
+        "vram_used_avg_mb": 350156.71,
+        "vram_used_max_mb": 350172.0,
+        "vram_total_mb": 391548.0,
+        "vram_used_avg_pct": 89.43,
+        "vram_used_max_pct": 89.43,
+        "pcie_rx_avg_mb_s": 21482.56,
+        "pcie_rx_max_mb_s": 65493.0,
+        "pcie_tx_avg_mb_s": 19296.65,
+        "pcie_tx_max_mb_s": 49215.0
+      },
+      "prefix_probe": {
+        "label": "stock-fine-256",
+        "target_prompt_tokens": 52445,
+        "results": [
+          {
+            "label": "cold",
+            "wall_seconds": 5.981629134003015,
+            "prompt_tokens": 52445,
+            "completion_tokens": 12,
+            "hit": true,
+            "content": "COPPER-LANTERN-64625",
+            "reasoning_content": ""
+          },
+          {
+            "label": "repeat",
+            "wall_seconds": 0.1514191610040143,
+            "prompt_tokens": 52445,
+            "completion_tokens": 12,
+            "hit": true,
+            "content": "COPPER-LANTERN-64625",
+            "reasoning_content": ""
+          }
+        ],
+        "cold_metric_delta": {
+          "vllm:prompt_tokens_by_source_total:local_cache_hit": 0.0,
+          "vllm:prefix_cache_hits_total": 0.0,
+          "vllm:prompt_tokens_by_source_total:local_compute": 52445.0
+        },
+        "repeat_metric_delta": {
+          "vllm:prompt_tokens_by_source_total:local_cache_hit": 52224.0,
+          "vllm:prefix_cache_hits_total": 52224.0,
+          "vllm:prompt_tokens_by_source_total:local_compute": 221.0
+        },
+        "outputs_identical": true
+      },
+      "benchmark_naive_capacity_tokens": 1127424
+    },
+    "stock-coarse-2048": {
+      "kv_capacity_tokens": 3040870,
+      "prefill32_tokens_per_second": 8536.0,
+      "cells": {
+        "C1@0": 229.91440126328442,
+        "C1@16384": 240.97727745038625,
+        "C1@32768": 245.07723118638137,
+        "C4@0": 513.3165306377718,
+        "C8@0": 736.0610594313409,
+        "C16@0": 1023.2807111075066,
+        "C4@16384": 521.1473327198087,
+        "C8@16384": 722.0040572296598,
+        "C16@16384": 1049.7309153804104,
+        "C4@32768": 513.1953589326736,
+        "C8@32768": 737.244512479316,
+        "C16@32768": 1032.4030003351136
+      },
+      "hardware": {
+        "samples": 218,
+        "duration_seconds": 525.889,
+        "gpu_count": 4,
+        "cpu_util_avg_pct": 10.73,
+        "cpu_temp_max_c": 44.0,
+        "gpu_util_avg_pct": 93.85,
+        "gpu_util_max_pct": 100.0,
+        "mem_util_avg_pct": 57.72,
+        "mem_util_max_pct": 74.0,
+        "temp_avg_c": 47.51,
+        "temp_max_c": 54.0,
+        "power_total_avg_w": 1473.73,
+        "power_total_max_w": 1766.3,
+        "power_limit_total_w": 2400.0,
+        "vram_used_avg_mb": 349449.47,
+        "vram_used_max_mb": 349464.0,
+        "vram_total_mb": 391548.0,
+        "vram_used_avg_pct": 89.25,
+        "vram_used_max_pct": 89.25,
+        "pcie_rx_avg_mb_s": 22109.7,
+        "pcie_rx_max_mb_s": 64504.0,
+        "pcie_tx_avg_mb_s": 20024.17,
+        "pcie_tx_max_mb_s": 49382.0
+      },
+      "prefix_probe": {
+        "label": "stock-coarse-2048",
+        "target_prompt_tokens": 52445,
+        "results": [
+          {
+            "label": "cold",
+            "wall_seconds": 6.028585617998033,
+            "prompt_tokens": 52445,
+            "completion_tokens": 12,
+            "hit": true,
+            "content": "COPPER-LANTERN-64625",
+            "reasoning_content": ""
+          },
+          {
+            "label": "repeat",
+            "wall_seconds": 6.7004335960009485,
+            "prompt_tokens": 52445,
+            "completion_tokens": 12,
+            "hit": true,
+            "content": "COPPER-LANTERN-64625",
+            "reasoning_content": ""
+          }
+        ],
+        "cold_metric_delta": {
+          "vllm:prefix_cache_hits_total": 0.0,
+          "vllm:prompt_tokens_by_source_total:local_compute": 52445.0,
+          "vllm:prompt_tokens_by_source_total:local_cache_hit": 0.0
+        },
+        "repeat_metric_delta": {
+          "vllm:prefix_cache_hits_total": 0.0,
+          "vllm:prompt_tokens_by_source_total:local_compute": 52445.0,
+          "vllm:prompt_tokens_by_source_total:local_cache_hit": 0.0
+        },
+        "outputs_identical": true
+      },
+      "benchmark_naive_capacity_tokens": 4157440
+    },
+    "pr646-decoupled-2048-256": {
+      "kv_capacity_tokens": 3040870,
+      "prefill32_tokens_per_second": 8363.0,
+      "cells": {
+        "C1@0": 230.05819599100795,
+        "C1@16384": 231.73002462148992,
+        "C1@32768": 233.103450429999,
+        "C4@0": 484.72799355674624,
+        "C8@0": 735.0429346852815,
+        "C16@0": 1013.0193042746613,
+        "C4@16384": 504.1933530081828,
+        "C8@16384": 711.4110915815821,
+        "C16@16384": 1009.8564024542353,
+        "C4@32768": 504.6140417680257,
+        "C8@32768": 725.1107561245101
+      },
+      "hardware": {
+        "samples": 187,
+        "duration_seconds": 451.345,
+        "gpu_count": 4,
+        "cpu_util_avg_pct": 10.71,
+        "cpu_temp_max_c": 44.0,
+        "gpu_util_avg_pct": 91.39,
+        "gpu_util_max_pct": 100.0,
+        "mem_util_avg_pct": 57.8,
+        "mem_util_max_pct": 74.0,
+        "temp_avg_c": 47.41,
+        "temp_max_c": 53.0,
+        "power_total_avg_w": 1453.19,
+        "power_total_max_w": 1699.16,
+        "power_limit_total_w": 2400.0,
+        "vram_used_avg_mb": 349455.36,
+        "vram_used_max_mb": 349472.0,
+        "vram_total_mb": 391548.0,
+        "vram_used_avg_pct": 89.25,
+        "vram_used_max_pct": 89.25,
+        "pcie_rx_avg_mb_s": 20343.68,
+        "pcie_rx_max_mb_s": 63531.0,
+        "pcie_tx_avg_mb_s": 18401.34,
+        "pcie_tx_max_mb_s": 48508.0
+      },
+      "prefix_probe": {
+        "label": "pr646-decoupled-2048-256",
+        "target_prompt_tokens": 52445,
+        "results": [
+          {
+            "label": "cold",
+            "wall_seconds": 6.05145631400228,
+            "prompt_tokens": 52445,
+            "completion_tokens": 12,
+            "hit": true,
+            "content": "COPPER-LANTERN-64625",
+            "reasoning_content": ""
+          },
+          {
+            "label": "repeat",
+            "wall_seconds": 0.16877631299576024,
+            "prompt_tokens": 52445,
+            "completion_tokens": 24,
+            "hit": true,
+            "content": "COPPER-LANTERN-64625",
+            "reasoning_content": ""
+          }
+        ],
+        "cold_metric_delta": {
+          "vllm:prompt_tokens_by_source_total:local_compute": 52445.0,
+          "vllm:prefix_cache_hits_total": 0.0,
+          "vllm:prompt_tokens_by_source_total:local_cache_hit": 0.0
+        },
+        "repeat_metric_delta": {
+          "vllm:prompt_tokens_by_source_total:local_compute": 221.0,
+          "vllm:prefix_cache_hits_total": 52224.0,
+          "vllm:prompt_tokens_by_source_total:local_cache_hit": 52224.0
+        },
+        "outputs_identical": true
+      },
+      "benchmark_naive_capacity_tokens": 519680
+    }
+  },
+  "comparison": {
+    "capacity_gain_vs_fine_256": 3.010628239335871,
+    "capacity_change_vs_stock_coarse": 0.0,
+    "fine_prefix_hit_change_vs_stock_coarse": 52224.0,
+    "throughput_delta_percent_vs_stock_coarse": {
+      "C16@0": -1.0027949048056706,
+      "C16@16384": -3.798546117099444,
+      "C1@0": 0.06254272326284838,
+      "C1@16384": -3.837396175579344,
+      "C1@32768": -4.885717330173489,
+      "C4@0": -5.569377835057388,
+      "C4@16384": -3.253202817549694,
+      "C4@32768": -1.6721346004560544,
+      "C8@0": -0.13832069133585811,
+      "C8@16384": -1.4671615127376247,
+      "C8@32768": -1.6458252519236383
+    },
+    "mean_absolute_throughput_delta_percent": 2.484819996361914,
+    "worst_throughput_delta_percent": -5.569377835057388,
+    "capacity_metric_note": "GPU KV cache size from server log is authoritative; llm-inference-bench num_blocks x public 256-token block undercounts heterogeneous 2048/256 geometry."
+  },
+  "correctness": {
+    "prefix_outputs_identical_all_arms": true,
+    "needle_90k_hits": 4,
+    "needle_90k_total": 4,
+    "estonia_correct": 10,
+    "estonia_total": 12,
+    "estonia_errors": 0,
+    "estonia_waves": 2,
+    "stock_estonia_waves": 2,
+    "stock_estonia_correct": 12,
+    "stock_estonia_total": 12,
+    "stock_estonia_errors": 0
+  }
+}

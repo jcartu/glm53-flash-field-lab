@@ -1,0 +1,25 @@
+{
+  "identity": "R25-UNIQUE-80K-SILVER-25001",
+  "cache_salt": "r25-unique-80k-v1",
+  "target_prompt_tokens": 80000,
+  "results": [
+    {
+      "label": "cold",
+      "wall_seconds": 11.865517697005998,
+      "prompt_tokens": 80000,
+      "completion_tokens": 1
+    },
+    {
+      "label": "warm",
+      "wall_seconds": 0.6836292829975719,
+      "prompt_tokens": 80000,
+      "completion_tokens": 1
+    },
+    {
+      "label": "restart",
+      "wall_seconds": 0.7239071500007412,
+      "prompt_tokens": 80000,
+      "completion_tokens": 1
+    }
+  ]
+}

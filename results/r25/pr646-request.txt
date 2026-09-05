@@ -1,0 +1,13 @@
+Discord request from el8, user 486723611919515648, message 1545607136594108426:
+
+"If you like to live dangerously but also like more kvcache, would appreciate a test.
+
+https://github.com/local-inference-lab/vllm/pull/646"
+
+Test boundary:
+- Run only after the clean published-R25 battery.
+- Rebase the draft PR's two commits onto exact R25 vLLM commit d49385468458cf97dff0fc8d9c8863f8082abf4f.
+- Keep the derived image local and clearly test-only.
+- TP4/DCP1 only, because the PR explicitly leaves DCP greater than one unmeasured.
+- Compare stock 256/256, stock 2048/2048, and PR646 2048/256 at a 256-token prefix match unit.
+- Measure runtime KV capacity, exact repeated-prefix hit tokens, cached replay wall time, the 0/16K/32K decode matrix, 90K cached-needle correctness, and Estonia.

@@ -1,0 +1,114 @@
+{
+  "target_prompt_tokens": 1000000,
+  "local_prompt_tokens": 1000000,
+  "cache_salt": "r25-exact-million-v1",
+  "needle_code": "SILVER-CEDAR-25001",
+  "results": [
+    {
+      "label": "cold",
+      "wall_seconds": 124.62549249499716,
+      "prompt_tokens": 1000000,
+      "completion_tokens": 18,
+      "hit": true,
+      "content": "SILVER-CEDAR-25001",
+      "reasoning_content": "",
+      "answer": "SILVER-CEDAR-25001",
+      "finish_reason": "stop"
+    },
+    {
+      "label": "warm-1",
+      "wall_seconds": 2.5814789489959367,
+      "prompt_tokens": 1000000,
+      "completion_tokens": 21,
+      "hit": true,
+      "content": "SILVER-CEDAR-25001",
+      "reasoning_content": "",
+      "answer": "SILVER-CEDAR-25001",
+      "finish_reason": "stop"
+    },
+    {
+      "label": "warm-2",
+      "wall_seconds": 2.4757593809990794,
+      "prompt_tokens": 1000000,
+      "completion_tokens": 21,
+      "hit": true,
+      "content": "SILVER-CEDAR-25001",
+      "reasoning_content": "",
+      "answer": "SILVER-CEDAR-25001",
+      "finish_reason": "stop"
+    },
+    {
+      "label": "warm-3",
+      "wall_seconds": 2.6248230540004442,
+      "prompt_tokens": 1000000,
+      "completion_tokens": 20,
+      "hit": true,
+      "content": "SILVER-CEDAR-25001",
+      "reasoning_content": "",
+      "answer": "SILVER-CEDAR-25001",
+      "finish_reason": "stop"
+    },
+    {
+      "label": "warm-4",
+      "wall_seconds": 2.5542814529981115,
+      "prompt_tokens": 1000000,
+      "completion_tokens": 21,
+      "hit": true,
+      "content": "SILVER-CEDAR-25001",
+      "reasoning_content": "",
+      "answer": "SILVER-CEDAR-25001",
+      "finish_reason": "stop"
+    },
+    {
+      "label": "warm-5",
+      "wall_seconds": 2.4371426519937813,
+      "prompt_tokens": 1000000,
+      "completion_tokens": 21,
+      "hit": true,
+      "content": "SILVER-CEDAR-25001",
+      "reasoning_content": "",
+      "answer": "SILVER-CEDAR-25001",
+      "finish_reason": "stop"
+    },
+    {
+      "label": "restart-1",
+      "wall_seconds": 3.138658222000231,
+      "prompt_tokens": 1000000,
+      "completion_tokens": 18,
+      "hit": true,
+      "content": "SILVER-CEDAR-25001",
+      "reasoning_content": "",
+      "answer": "SILVER-CEDAR-25001",
+      "finish_reason": "stop"
+    },
+    {
+      "label": "restart-2",
+      "wall_seconds": 2.6007428910015733,
+      "prompt_tokens": 1000000,
+      "completion_tokens": 20,
+      "hit": true,
+      "content": "SILVER-CEDAR-25001",
+      "reasoning_content": "",
+      "answer": "SILVER-CEDAR-25001",
+      "finish_reason": "stop"
+    },
+    {
+      "label": "restart-3",
+      "wall_seconds": 2.491679890001251,
+      "prompt_tokens": 1000000,
+      "completion_tokens": 21,
+      "hit": true,
+      "content": "SILVER-CEDAR-25001",
+      "reasoning_content": "",
+      "answer": "SILVER-CEDAR-25001",
+      "finish_reason": "stop"
+    }
+  ],
+  "summary": {
+    "hit_count": 9,
+    "exact_output_count": 9,
+    "warm_median_seconds": 2.5542814529981115,
+    "restart_first_seconds": 3.138658222000231,
+    "restart_steady_median_seconds": 2.546211390501412
+  }
+}

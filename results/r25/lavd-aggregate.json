@@ -1,0 +1,12 @@
+{
+  "waves": 2,
+  "attempted": 16,
+  "completed": 16,
+  "correct": 14,
+  "wrong": 2,
+  "errors": 0,
+  "exact": 14,
+  "fail": 2,
+  "aggregate_gen_tps": 185.41216439715416,
+  "aggregate_e2e_tps": 177.3487722263173
+}

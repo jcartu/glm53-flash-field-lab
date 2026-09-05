@@ -1,0 +1,13 @@
+Qualified R25 vLLM source:
+repository: https://github.com/local-inference-lab/vllm
+branch: integration/glm53-r23-lmcache-parser-20260904
+commit: d49385468458cf97dff0fc8d9c8863f8082abf4f
+path: vllm/v1/core/sched/scheduler.py
+
+Observed control flow:
+
+1. PrefillComputeShareController.select() receives only two booleans, decode_runnable and prefill_runnable, and chooses a compute service class. It does not receive request length, hot/cold identity, pending decode ancestry, or a per-prefill priority.
+
+2. Waiting requests remain in the configured RequestQueue. With the default FCFS policy, _select_waiting_queue_for_scheduling() returns the queue and schedule() takes request_queue.peek_request(). Compute-share controls whether a prefill-class step runs, but does not reorder the prefills inside that class.
+
+This matches D-Rock's explanation: R25 protects decode versus prefill execution share but does not prioritize or fully interleave queued prefill jobs. The dedicated hot-request field test measures the resulting agent-turn latency and backpressure at C8 and C16.
