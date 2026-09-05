@@ -1,0 +1,19 @@
+{
+  "verified_at": "2026-09-05T05:56:16Z",
+  "container": "glm53-prod",
+  "image_digest": "sha256:89376e9aa49442a90754662ca1bb281bffbeca29bb7393e6e8281506e5ac4804",
+  "state": "running",
+  "port": 5001,
+  "model": "GLM-5.3-Flash-NVFP4",
+  "max_model_len": 1048576,
+  "ipc_mode": "private",
+  "shm_bytes": 137438953472,
+  "restart_policy": "unless-stopped",
+  "health_endpoint": "pass",
+  "models_endpoint": "pass",
+  "chat_endpoint": {
+    "pass": true,
+    "expected": "R25 production healthy",
+    "observed": "R25 production healthy"
+  }
+}

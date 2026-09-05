@@ -1,0 +1,31 @@
+{
+  "channel_id": "1471527895439638528",
+  "author_id": "448933919447056385",
+  "posts": [
+    {
+      "id": "1545671929308913694",
+      "kind": "R25 performance and LMCache report",
+      "attachments": ["r25-topology.png", "r25-regression.png", "r25-restore.png", "r25-lmcache.png"]
+    },
+    {
+      "id": "1545672074918498364",
+      "kind": "R25 validation and honest tails",
+      "attachments": ["r25-scorecard.png"]
+    },
+    {
+      "id": "1545672136214183936",
+      "kind": "iSource cyclic agent hot-request reply",
+      "reply_to": "1545574482989813861",
+      "mentions": ["798161842031427584", "1500000773541593231"],
+      "attachments": ["r25-hot-request-queue.png"]
+    },
+    {
+      "id": "1545672222624976948",
+      "kind": "el8 PR646 field-test reply",
+      "reply_to": "1545607136594108426",
+      "mentions": ["486723611919515648"],
+      "attachments": ["pr646-r25-field-test.png"]
+    }
+  ],
+  "verified": true
+}
