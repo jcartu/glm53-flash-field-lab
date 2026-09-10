@@ -1,0 +1,114 @@
+{
+  "schema": "r29-r32-publication/v1",
+  "posted_at": "2026-09-10T09:48:34+0200",
+  "channel_id": "1471527895439638528",
+  "guild_channel_name": "glm-53-flash (RTX6kPRO)",
+  "source_plan": "/home/josh/omp-workspace/glm53-flash-field-lab/results/r29/discord-post-plan.json",
+  "message_count": 13,
+  "messages": [
+    {
+      "plan_id": 1,
+      "id": "1547513566050123887",
+      "timestamp": "2026-09-10T07:46:25.558000+00:00",
+      "attachment_urls": [
+        "https://cdn.discordapp.com/attachments/1471527895439638528/1547513565576171530/04-runtime-baseline.png?ex=6aa3b1d1&is=6aa26051&hm=e4dac5e518185099993410b8d2852b1149178fa11746c2ab04985988d4da0928&"
+      ]
+    },
+    {
+      "ok": true,
+      "id": "1547513913577578506",
+      "timestamp": "2026-09-10T07:47:48.415000+00:00",
+      "attachment_urls": [
+        "https://cdn.discordapp.com/attachments/1471527895439638528/1547513913329983488/03-checkpoint-quality.png?ex=6aa3b224&is=6aa260a4&hm=093051098032336c076bf80e62248962902443f0ad94965f960556b8d7ec4fec&"
+      ],
+      "plan_id": 2
+    },
+    {
+      "ok": true,
+      "id": "1547513929025191956",
+      "timestamp": "2026-09-10T07:47:52.098000+00:00",
+      "attachment_urls": [
+        "https://cdn.discordapp.com/attachments/1471527895439638528/1547513928421085186/01-speculative-matrix-throughput.png?ex=6aa3b227&is=6aa260a7&hm=abaaa0437650eeeacfe78ec9fc748553c015fecef99d84b2394d7dc649f91954&",
+        "https://cdn.discordapp.com/attachments/1471527895439638528/1547513928756625458/02-speculative-efficiency.png?ex=6aa3b228&is=6aa260a8&hm=0fdcf9506084c8cb0db2230eba5ab9d498cfd098e6cf8ded7e8b08e458971509&"
+      ],
+      "plan_id": 3
+    },
+    {
+      "ok": true,
+      "id": "1547513943088701461",
+      "timestamp": "2026-09-10T07:47:55.451000+00:00",
+      "attachment_urls": [],
+      "plan_id": 4
+    },
+    {
+      "ok": true,
+      "id": "1547513960117575693",
+      "timestamp": "2026-09-10T07:47:59.511000+00:00",
+      "attachment_urls": [
+        "https://cdn.discordapp.com/attachments/1471527895439638528/1547513960042074143/05-lmcache-ram-overlay.png?ex=6aa3b22f&is=6aa260af&hm=8512bfd7a5c9e588f34d6754d86b0d00f60f44434953615b96c6427cf5a30a3f&"
+      ],
+      "plan_id": 5
+    },
+    {
+      "ok": true,
+      "id": "1547513982716350474",
+      "timestamp": "2026-09-10T07:48:04.899000+00:00",
+      "attachment_urls": [],
+      "plan_id": 6
+    },
+    {
+      "ok": true,
+      "id": "1547513995878207518",
+      "timestamp": "2026-09-10T07:48:08.037000+00:00",
+      "attachment_urls": [
+        "https://cdn.discordapp.com/attachments/1471527895439638528/1547513995655651378/06-disk-cache-gates.png?ex=6aa3b237&is=6aa260b7&hm=af188fc6805d6cdae1eb65797bfbd1fe5a7f2e4ad0561ee19a11075c9b9a415d&"
+      ],
+      "plan_id": 7
+    },
+    {
+      "ok": true,
+      "id": "1547514009715212309",
+      "timestamp": "2026-09-10T07:48:11.336000+00:00",
+      "attachment_urls": [],
+      "plan_id": 8
+    },
+    {
+      "ok": true,
+      "id": "1547514033547116594",
+      "timestamp": "2026-09-10T07:48:17.018000+00:00",
+      "attachment_urls": [],
+      "plan_id": 9
+    },
+    {
+      "ok": true,
+      "id": "1547514047401041941",
+      "timestamp": "2026-09-10T07:48:20.321000+00:00",
+      "attachment_urls": [],
+      "plan_id": 10
+    },
+    {
+      "ok": true,
+      "id": "1547514061137256458",
+      "timestamp": "2026-09-10T07:48:23.596000+00:00",
+      "attachment_urls": [],
+      "plan_id": 11
+    },
+    {
+      "ok": true,
+      "id": "1547514072658878494",
+      "timestamp": "2026-09-10T07:48:26.343000+00:00",
+      "attachment_urls": [],
+      "plan_id": 12
+    }
+  ],
+  "keith_reply": {
+    "ok": true,
+    "id": "1547514086324183040",
+    "timestamp": "2026-09-10T07:48:29.601000+00:00",
+    "attachment_urls": []
+  },
+  "keith_reference_message": "1547380722103222312",
+  "verified_readback": true,
+  "readback_missing_ids": [],
+  "url_first": "https://discord.com/channels/1466898002793857221/1471527895439638528/1547513566050123887"
+}
