@@ -4,7 +4,7 @@ Hey fellas,
 
 Here is the consolidated readout from the R29 battery on the 4x Blackwell rig. The GPU-only batteries are done and verified: the 18 config speculative matrix finished clean at 20:51 CEST, all sentinels passed, and production was restored healthy on the original container. The R30 disk-cache campaign also completed tonight on the rig, its numbers get a short section below.
 
-Charts and raw receipts are in the repo at <https://github.com/jcartu/glm53-flash-field-lab/tree/main/results/r29>. Full numbers below so you don't need to leave the post.
+Charts and raw receipts are in the repo at <https://github.com/jcartu/glm53-flash-field-lab/tree/master/results/r29>. Full numbers below so you don't need to leave the post.
 
 ### 1. R28.1 vs R29 Runtime Baseline
 
@@ -114,6 +114,8 @@ One more thing from tonight: the DFlash2 C8 slowdown from section 3 is now confi
 
 And R31 already shipped while we ran that (pinned `localinferencelab/vllm:jovian-judgement-community-20260909-r31`, digest sha256:da7157d5649a85298635c44b03eeb127837448fa42a45388e48ad9de4a99ff39). Its dflash2 launcher now defaults capture sizes up to 256 including 64, so the C8 problem above is already gone on stock R31. LMCache moved to f868580a (includes the #66 restore admission fix), and the recurrent connector is byte-identical, so the cancellation telemetry gap persists there too.
 
+And R32 landed at 23:51 UTC too (pinned sha256:c9ad4a6ef4aa55232df9ed1a37e85d94eb8c7d5349561a6cbe828e72b61de83c). It is LMCache only, D-Rock's #65 so overlapping checkpoint stores wait for the writer instead of recomputing, vLLM commit unchanged from R31, so nothing above moves. Known limit in the bot post: MTP plus strict JSON schema plus LMCache can 500, issue #726. D-Rock gave R32 a clean bill of health.
+
 ### 7. NVIDIA's GLM-5.3-Flash-NVFP4 Drop
 
 NVIDIA published their own quant of 5.3 Flash this evening (<https://huggingface.co/nvidia/GLM-5.3-Flash-NVFP4>, ModelOpt 0.47 PTQ, MIT, 33 shards ~204 GB). We pulled it and verified all 35 LFS files byte-identical against the HF tree, so it's staged on our disk as a candidate arm.
@@ -125,14 +127,18 @@ Layout vs Luke's published checkpoint, from the weight map and config:
 
 Two gotchas. Their chat template predates Luke's tool-result fix (#3), so a tool message with content=None renders the literal string None. And their config declares plain NVFP4, which makes our launcher's modelopt_mixed flag resolve to modelopt_fp4; the MTP layer inherits the quant config in code, so speculative arms need a boot test before we trust them. Text-only no-spec boots skip that layer entirely and look fine.
 
-The comparison ran overnight on stock R31 (TP4/DCP1, no-spec, one boot per arm, same frozen 61-task behavior suite + 32 history tasks + bench):
+The comparison ran overnight on stock R31 (TP4/DCP1, no-spec, one boot per arm, same frozen suite: 52 functional tasks plus 9 known diagnostic profile prompts, plus 32 history tasks and the bench). Reported on the same basis as section 2, see r31-behavior-reconciliation.json:
 
 ```
-Arm        Strict  Semantic     History   C1 tok/s   C8 tok/s
-nvidia       50/61   58/60        32/32     177.4      784.4
-published    52/61   61/61        32/32     174.9      780.9
-qad2500      51/61   58/59        32/32     174.9      783.0
+Arm         Func strict   Func semantic   Diagnostic   History   C1 tok/s   C8 tok/s
+nvidia         43/52         51/52           7/9        32/32     177.4      784.4
+published      43/52         52/52           9/9        32/32     174.9      780.9
+qad2500        44/52         51/52           7/9        32/32     174.9      783.0
 ```
+
+So on this suite NVIDIA's quant and Luke's are within a task of each other on strict format and semantic, same 32/32 on history, same decode speed. Not the AA-LCR run Keith asked about, that one we have not done, but it is the only same rig same harness head to head of the two quants I know of.
+
+Note published scores 42/52 strict on R29 versus 43/52 here. Same checkpoint, different image, T1 sampling, one boot each, so a one-task swing is run-to-run variance, not a regression claim in either direction.
 
 All three booted clean (nvidia resolved to modelopt_fp4 with safetensors as predicted, zero weight-load warnings), sentinels and bench validity pass everywhere, and NVIDIA even leads decode by ~1.4% at C1, single boot, descriptive only. On the bounded suite NVIDIA lands slightly below published, same ballpark as QAD/TVN, not a ranking. Two sanity arms too: dflash2 on R31's default launcher did C8 at 282.9/285.6 verifier steps/s and 713/739 tok/s, so the capture-size fix is confirmed live on stock R31; and the R31 dcp4-mtp3 disk arm passed both dedup gates and both identity gates (35 pass, 0 fail, only the known 3 observability-unavailable gates).
 

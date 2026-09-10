@@ -1,0 +1,50 @@
+{
+  "schema": "r31-behavior-reconciliation/v1",
+  "generated_at": "2026-09-10T03:30:00+02:00",
+  "purpose": "Re-express the R31 checkpoint-comparison behavior results on the SAME basis as the R29 report section 2: 52 functional tasks (kind != profile) and 9 known diagnostic profile prompts (kind == profile), strict and semantic reported separately, instead of the pooled 61-task totals.",
+  "method": "functional_strict = rows with kind != profile and strict_task_passed true in semantic-rescore-v2.json (equals summary.json task_passed on the same rows); functional_semantic_correct = kind != profile and semantic_correct true; unassessable = kind != profile and semantic_assessed false; diagnostic_passed = kind == profile rows with summary task_passed true. Revalidated by applying the same function to the R29 arms, which reproduces the published R29 numbers exactly.",
+  "cross_check_r29_reproduced": {
+    "r29-published": {"functional_strict": "42/52", "functional_semantic": "52/52", "diagnostic_passed": "6/9"},
+    "r29-qad2500": {"functional_strict": "44/52", "functional_semantic": "52/52", "diagnostic_passed": "4/9"},
+    "r29-tvn1500": {"functional_strict": "38/52", "functional_semantic": "50/50 (2 unassessable)", "diagnostic_passed": "7/9"},
+    "matches_checkpoint_comparison_results_json": true
+  },
+  "r31_arms": {
+    "nvidia": {
+      "functional_strict": 43, "functional_semantic_correct": 51, "functional_semantic_assessed": 52, "functional_unassessable": 0,
+      "diagnostic_passed": 7, "diagnostic_attempts": 9,
+      "pooled_totals_check": {"strict_total": "50/61 = 43+7", "semantic_total": "58 correct / 60 assessed = (51+7)/(52+8)", "matches_r31_progress_json": true},
+      "semantic_functional_failure": {"id": "data-ledger-3", "kind": "json", "disposition": "json-content-separate-from-format"},
+      "sources": {
+        "summary": "R/r31-checkpoint-comparison/nvidia/behavior/summary.json",
+        "rescore": "R/r31-checkpoint-comparison/nvidia/behavior/semantic-rescore-v2.json"
+      }
+    },
+    "published": {
+      "functional_strict": 43, "functional_semantic_correct": 52, "functional_semantic_assessed": 52, "functional_unassessable": 0,
+      "diagnostic_passed": 9, "diagnostic_attempts": 9,
+      "pooled_totals_check": {"strict_total": "52/61 = 43+9", "semantic_total": "61/61 = 52+9", "matches_r31_progress_json": true},
+      "sources": {
+        "summary": "R/r31-checkpoint-comparison/published/behavior/summary.json",
+        "rescore": "R/r31-checkpoint-comparison/published/behavior/semantic-rescore-v2.json"
+      }
+    },
+    "qad2500": {
+      "functional_strict": 44, "functional_semantic_correct": 51, "functional_semantic_assessed": 52, "functional_unassessable": 0,
+      "diagnostic_passed": 7, "diagnostic_attempts": 9,
+      "pooled_totals_check": {"strict_total": "51/61 = 44+7", "semantic_total": "58 correct / 59 assessed = (51+7)/(52+7)", "matches_r31_progress_json": true},
+      "semantic_functional_failure": {"id": "code-topological-26090901", "kind": "code", "disposition": "same-hidden-tests-with-module-level-assignments-allowed"},
+      "sources": {
+        "summary": "R/r31-checkpoint-comparison/qad2500/behavior/summary.json",
+        "rescore": "R/r31-checkpoint-comparison/qad2500/behavior/semantic-rescore-v2.json"
+      }
+    }
+  },
+  "published_r29_vs_r31": {
+    "r29": {"functional_strict": "42/52", "functional_semantic": "52/52", "diagnostic": "6/9"},
+    "r31": {"functional_strict": "43/52", "functional_semantic": "52/52", "diagnostic": "9/9"},
+    "difference": "+1 functional strict, +3 diagnostic passed, semantic identical",
+    "interpretation": "Same checkpoint package, different image (R29 to R31) and T1/top_p 0.95 sampling, one boot per arm. Run-to-run variance is expected on a small bounded suite; this is not a regression claim in either direction."
+  },
+  "scope": "Bounded synthetic suite, not a general model ranking. Strict format compliance and semantic correctness reported separately; diagnostic profile prompts kept out of the functional 52."
+}

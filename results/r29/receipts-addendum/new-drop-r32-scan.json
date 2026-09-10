@@ -1,0 +1,44 @@
+{
+  "schema": "r29-new-drop-scan/v1 (r32 variant)",
+  "captured_at": "2026-09-10T08:20:00+02:00",
+  "source": "Discord API, channels glm53-flash (1471527895439638528) and glm-53 (1542910591730192434), limit=40 each; verbatim capture in R/new-drop-r32-messages.txt",
+  "r32": {
+    "image_tag": "localinferencelab/vllm:jovian-judgement-community-20260909-r32",
+    "manifest_digest": "sha256:c9ad4a6ef4aa55232df9ed1a37e85d94eb8c7d5349561a6cbe828e72b61de83c",
+    "platform": "linux/amd64 single-manifest",
+    "announced": "2026-09-09T23:51:43Z by RTX6kPRO Bot in #glm-53-flash (msg 1547394105607196773)",
+    "pulled": "docker pull by digest completed 2026-09-10 ~08:15 CEST (disk only, not run)",
+    "headline_changes_vs_r31": [
+      "D-Rock's LMCache #65: overlapping checkpoint stores sharing an immutable page now wait for its writer instead of losing the checkpoint and recomputing the prompt",
+      "Background retry; committed pages need no duplicate copy; same image required for workers and sidecar",
+      "All R31 optimizations retained (host-RAM cache, GLM/Qwen/DS4 profiles, TWO-layer packaging); stated as no compute/kernel change"
+    ],
+    "bot_validation_lines": "124 CPU tests; exact 54.6K answers zero-recompute: RAM 272 ms, filesystem 294 ms, both-service restart 409 ms; 6.95 GB payloads through 4 GiB RAM, oldest 32K restored in 82 ms zero recompute; correctness probes, not speedup A/Bs",
+    "perf_note": "reference only from R31 (C1 259.26 tok/s, 32K prefill 11068); not remeasured for R32, no decode-speedup claim",
+    "launch_recipe": "TP4/DCP1 MTP3 FP8 KV budget 4096: docker run -d --name glm --gpus '\"device=0,1,2,3\"' --network host --ipc host -v glm-r32:/cache -v glm-models:/root/.cache/huggingface -e TP=4 -e DCP=1 -e PORT=8000 -e SPECULATOR=mtp -e MTP_DEPTH=3 localinferencelab/vllm:jovian-judgement-community-20260909-r32; no-spec MTP_DEPTH=0; DFlash2 SPECULATOR=dflash2 + DFLASH_DEPTH=7; LMCache CACHE_MODE=lmcache, retry automatic; docs https://github.com/local-inference-lab/rtx6kpro/blob/master/models/glm-5.3-flash.md",
+    "known_limitation": "MTP + strict JSON schema + LMCache can return HTTP 500, reproduced on R31 too; tracked at https://github.com/local-inference-lab/vllm/issues/726"
+  },
+  "community_messages_since_2200Z": {
+    "drock01057": [
+      "22:34 posted LMCache PR #65 (multi-tenant LMCache collision issue resolution)",
+      "01:26 asking whether anyone ran the NVIDIA quant yet; 'in Luke I trust. But... they have a ton of resources'; wonders about kv packing parity and nvfp4 KV tolerance",
+      "02:09 'R32 has clean bill of health from me', running it in prod tomorrow, resolves all issues he is aware of"
+    ],
+    "isensess": [
+      "01:13 independently notes the NVIDIA checkpoint differs from LiL's: BF16 MTP experts; 13.1M vs 13.9M KV on TP4/DCP4",
+      "01:14-01:33 ran NVIDIA nvfp4 on R32 through sieve, needle, estonia; fewer Estonia timeouts than before; FP8 KV in all tests; 'seems good to me'",
+      "corroborates our layer-45 BF16 finding and our R31 nvidia-arm behavior result"
+    ],
+    "logprobz": "23:57 R32 built from tip of tree, small tweaks; 23:59 cannot pull rig offline to test",
+    "keithdawson": "22:58 asking whether anyone benched the LiL Luke quant (our report answers this)",
+    "freeuser5566": "06:03 asking whether to switch weights to nvidia/GLM-5.3-Flash-NVFP4 vs local-inference-lab's",
+    "luke": "no luke-attributable messages since 22:00Z",
+    "other": "DS V4.1-Flash API release chatter (neolithic5452_v2, kcramp, daring_hare_33657); daring_hare on sglang tp2 + ormandj W4A16 quant"
+  },
+  "planning_implications": [
+    "R32 is an LMCache-only delta (lmcache f868580a -> 35ad809f, vLLM commit unchanged at 55769270): the natural candidate image for any follow-up disk/lifecycle work; stock R31 vs R32 would isolate #65 alone",
+    "#65 (store collision waits for writer) is a failure mode our lifecycle probes do not specifically exercise (single-writer namespaces); our dedup/identity gates already pass on R31 dcp4-mtp3",
+    "issue #726 (MTP + strict JSON schema + LMCache HTTP 500) does not touch our probes: behavior fixtures use plain chat completions, not structured-output schemas",
+    "NVIDIA arm conclusions from R31 carry to R32 unchanged (launcher and connector byte-identical); community (isensess) independently confirms the BF16-MTP-experts layout difference"
+  ]
+}

@@ -8,7 +8,7 @@
   "messages": [
     {
       "id": 1,
-      "text": "Hey folks. Roughly 15 hours of nonstop rig time overnight (Sept 9 12:30 to Sept 10 03:16 CEST), and the R29 through R31 batteries are all in. This is the consolidated readout, charts attached, full receipts in the repo at <https://github.com/jcartu/glm53-flash-field-lab/tree/main/results/r29>. Everything below is in-post, the repo is just the drawer.\n\n### 1. R28.1 vs R29 Runtime Baseline\n\nStandardized decode runtime is flat. ABBA order, two independent boots per image, TP4 / DCP1, no speculation. Mean changes across the six cells range from -0.39% to +0.20%. That is the run to run noise floor, so no regression, but no speedup either.\n\n```\nCell (C, Ctx)    R28.1 Mean    R29 Mean    Change (%)    Repeats (R28.1 / R29)\nC=1, ctx 0        175.12       175.18        +0.04%      [175.2, 175.0] / [175.0, 175.3]\nC=1, ctx 32K      174.54       174.88        +0.19%      [174.5, 174.6] / [174.9, 174.9]\nC=4, ctx 0        490.69       489.93        -0.15%      [489.0, 492.4] / [492.4, 487.4]\nC=4, ctx 32K      490.61       491.41        +0.16%      [492.1, 489.1] / [491.9, 490.9]\nC=8, ctx 0        786.51       783.46        -0.39%      [788.9, 784.1] / [780.8, 786.1]\nC=8, ctx 32K      783.21       781.05        -0.28%      [783.7, 782.7] / [782.9, 779.2]\n```",
+      "text": "Hey folks. Roughly 15 hours of nonstop rig time overnight (Sept 9 12:30 to Sept 10 03:16 CEST), and the R29 through R31 batteries are all in. This is the consolidated readout, charts attached, full receipts in the repo at <https://github.com/jcartu/glm53-flash-field-lab/tree/master/results/r29>. Everything below is in-post, the repo is just the drawer.\n\n### 1. R28.1 vs R29 Runtime Baseline\n\nStandardized decode runtime is flat. ABBA order, two independent boots per image, TP4 / DCP1, no speculation. Mean changes across the six cells range from -0.39% to +0.20%. That is the run to run noise floor, so no regression, but no speedup either.\n\n```\nCell (C, Ctx)    R28.1 Mean    R29 Mean    Change (%)    Repeats (R28.1 / R29)\nC=1, ctx 0        175.12       175.18        +0.04%      [175.2, 175.0] / [175.0, 175.3]\nC=1, ctx 32K      174.54       174.88        +0.19%      [174.5, 174.6] / [174.9, 174.9]\nC=4, ctx 0        490.69       489.93        -0.15%      [489.0, 492.4] / [492.4, 487.4]\nC=4, ctx 32K      490.61       491.41        +0.16%      [492.1, 489.1] / [491.9, 490.9]\nC=8, ctx 0        786.51       783.46        -0.39%      [788.9, 784.1] / [780.8, 786.1]\nC=8, ctx 32K      783.21       781.05        -0.28%      [783.7, 782.7] / [782.9, 779.2]\n```",
       "attachments": [
         "/home/josh/omp-workspace/glm53-flash-field-lab/results/r29/04-runtime-baseline.png"
       ]
@@ -59,21 +59,29 @@
     },
     {
       "id": 9,
-      "text": "### 7. NVIDIA's GLM-5.3-Flash-NVFP4 Drop\n\nNVIDIA published their own quant of 5.3 Flash this evening (<https://huggingface.co/nvidia/GLM-5.3-Flash-NVFP4>, ModelOpt 0.47 PTQ, MIT, 33 shards ~204 GB). We pulled it and verified all 35 LFS files byte-identical against the HF tree, so it's staged on our disk as a candidate arm.\n\nLayout vs Luke's published checkpoint, from the weight map and config:\n- NVIDIA quantizes the dense MLP of layers 0-2 as NVFP4, Luke keeps those BF16\n- The MTP predictor (layer 45) is plain BF16 in NVIDIA's, MXFP8 experts in Luke's\n- Vision tower is identical in both: 347 BF16 tensors, unquantized, same tokenizer bytes\n\nTwo gotchas. Their chat template predates Luke's tool-result fix (#3), so a tool message with content=None renders the literal string None. And their config declares plain NVFP4, which makes our launcher's modelopt_mixed flag resolve to modelopt_fp4; the MTP layer inherits the quant config in code, so speculative arms need a boot test before we trust them. Text-only no-spec boots skip that layer entirely and look fine.\n\nThe comparison ran overnight on stock R31 (TP4/DCP1, no-spec, one boot per arm, same frozen suite: 52 functional tasks plus 9 known diagnostic profile prompts, plus 32 history tasks and the bench). Reported on the same basis as section 2, see r31-behavior-reconciliation.json:\n\n```\nArm         Func strict   Func semantic   Diagnostic   History   C1 tok/s   C8 tok/s\nnvidia         43/52         51/52           7/9        32/32     177.4      784.4\npublished      43/52         52/52           9/9        32/32     174.9      780.9\nqad2500        44/52         51/52           7/9        32/32     174.9      783.0\n```\n\nNote published scores 42/52 strict on R29 versus 43/52 here. Same checkpoint, different image, T1 sampling, one boot each, so a one-task swing is run-to-run variance, not a regression claim in either direction.",
+      "text": "R32 landed at 23:51 UTC too (pinned sha256:c9ad4a6ef4aa55232df9ed1a37e85d94eb8c7d5349561a6cbe828e72b61de83c). It is LMCache only, D-Rock's #65 so overlapping checkpoint stores wait for the writer instead of recomputing, vLLM commit unchanged from R31, so nothing above moves. Known limit in the bot post: MTP plus strict JSON schema plus LMCache can 500, issue #726. D-Rock gave R32 a clean bill of health.",
       "attachments": []
     },
     {
       "id": 10,
+      "text": "### 7. NVIDIA's GLM-5.3-Flash-NVFP4 Drop\n\nNVIDIA published their own quant of 5.3 Flash this evening (<https://huggingface.co/nvidia/GLM-5.3-Flash-NVFP4>, ModelOpt 0.47 PTQ, MIT, 33 shards ~204 GB). We pulled it and verified all 35 LFS files byte-identical against the HF tree, so it's staged on our disk as a candidate arm.\n\nLayout vs Luke's published checkpoint, from the weight map and config:\n- NVIDIA quantizes the dense MLP of layers 0-2 as NVFP4, Luke keeps those BF16\n- The MTP predictor (layer 45) is plain BF16 in NVIDIA's, MXFP8 experts in Luke's\n- Vision tower is identical in both: 347 BF16 tensors, unquantized, same tokenizer bytes\n\nTwo gotchas. Their chat template predates Luke's tool-result fix (#3), so a tool message with content=None renders the literal string None. And their config declares plain NVFP4, which makes our launcher's modelopt_mixed flag resolve to modelopt_fp4; the MTP layer inherits the quant config in code, so speculative arms need a boot test before we trust them. Text-only no-spec boots skip that layer entirely and look fine.",
+      "attachments": []
+    },
+    {
+      "id": 11,
+      "text": "The comparison ran overnight on stock R31 (TP4/DCP1, no-spec, one boot per arm, same frozen suite: 52 functional tasks plus 9 known diagnostic profile prompts, plus 32 history tasks and the bench). Reported on the same basis as section 2, see r31-behavior-reconciliation.json:\n\n```\nArm         Func strict   Func semantic   Diagnostic   History   C1 tok/s   C8 tok/s\nnvidia         43/52         51/52           7/9        32/32     177.4      784.4\npublished      43/52         52/52           9/9        32/32     174.9      780.9\nqad2500        44/52         51/52           7/9        32/32     174.9      783.0\n```\n\nSo on this suite NVIDIA's quant and Luke's are within a task of each other on strict format and semantic, same 32/32 on history, same decode speed. Not the AA-LCR run Keith asked about, that one we have not done, but it is the only same rig same harness head to head of the two quants I know of.\n\nNote published scores 42/52 strict on R29 versus 43/52 here. Same checkpoint, different image, T1 sampling, one boot each, so a one-task swing is run-to-run variance, not a regression claim in either direction.",
+      "attachments": []
+    },
+    {
+      "id": 12,
       "text": "All three booted clean (nvidia resolved to modelopt_fp4 with safetensors as predicted, zero weight-load warnings), sentinels and bench validity pass everywhere, and NVIDIA even leads decode by ~1.4% at C1, single boot, descriptive only. On the bounded suite NVIDIA lands slightly below published, same ballpark as QAD/TVN, not a ranking. Two sanity arms too: dflash2 on R31's default launcher did C8 at 282.9/285.6 verifier steps/s and 713/739 tok/s, so the capture-size fix is confirmed live on stock R31; and the R31 dcp4-mtp3 disk arm passed both dedup gates and both identity gates (35 pass, 0 fail, only the known 3 observability-unavailable gates).\n\nAll receipts, sha256s, the gate matrix and the consolidated results JSON are in the repo link above. Production is restored healthy after every run.",
       "attachments": []
     }
   ],
   "validation": {
-    "problems": [
-      "msg 9: 1903 chars > 1900"
-    ],
+    "problems": [],
     "lengths": {
-      "1": 1263,
+      "1": 1265,
       "2": 1358,
       "3": 1246,
       "4": 1411,
@@ -81,8 +89,10 @@
       "6": 1169,
       "7": 1853,
       "8": 1602,
-      "9": 1903,
-      "10": 804
+      "9": 406,
+      "10": 1070,
+      "11": 1128,
+      "12": 804
     }
   }
 }

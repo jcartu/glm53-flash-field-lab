@@ -22,11 +22,15 @@ measurements — all reproducible from this repo.
 | `scripts/serve-glm53-flash-nvfp4.sh` | Production SGLang launcher (NVFP4 + DFlash2) |
 | `scripts/serve-r25-production.sh` | Pinned R25 production launcher: TP4/DCP4, DFlash K7, packed NVFP4 KV, LMCache, fairness 0.4, private 128 GiB SHM |
 | `scripts/r25/` | Reproducible R25 battery, matched R24 controls, cyclic agent hot-request workload, and isolated PR646 three-arm field test |
+| `scripts/r26/` | R26/R27 qualification, source-pinned QAD checkpoint comparison/recovery, GPU-health gates, and receipt-driven report/chart generators |
 
 ## Results index
 
 | File | What it shows |
 |---|---|
+| `results/r26/` | Complete R26 execution record, matched R25 and D-Rock controls, clean speed reruns, and context-separated history/inventory charts |
+| `results/r27/` | Pinned stock/patched/auto findings: scalar restore, cache stages, matched speed, and fixed-versus-auto scheduler tradeoffs |
+| `results/qad-step2500/` | Completed matched checkpoint slice; full runbook recovery status is explicit in the chart/sidecar and is not a qualification-pass claim |
 | `results/r25/` | Full R25 battery: 18 configs, DCP1/2/4, private-SHM LMCache, exact 1M replay, R24 brackets, hot-request queue test, PR646 field test, seven charts, and all pass/fail receipts |
 | `results/r24/` | Full R24 battery: 16 runtime configs, DCP1/2/4, three speculators, FP8/NVFP4 KV, GPU/LMCache/native modes, 1M needles and replay, fairness, corruption, tool ordering, Estonia/Lavd, charts |
 | `results/bench-r15.json` | JJ r15 — C16 1,130 t/s, decode flat to 128k (record on this host) |
@@ -41,13 +45,17 @@ measurements — all reproducible from this repo.
 
 ## Method notes
 
-- All decode numbers: aggregate tokens/sec, 30s cells, temp 0, same host
-  throughout every comparison in a table.
+- Decode is aggregate output tokens/sec. Duration and context are stated per chart:
+  legacy cells are generally 30 seconds; matched R27 cells are 60 seconds.
+  Different launch families, checkpoint weights, and reasoning settings stay separate.
 - Concurrency cells only run when the config's max-num-seqs admits them
   (the >16-stream cliff on JJ images is a cudagraph-capture issue:
   set MAX_CUDAGRAPH_CAPTURE_SIZE = concurrency x 8 for dflash2).
-- Corruption verdicts require byte-identical replies across eviction churn,
-  not just "looks fine".
+- Eviction/replay checks compare complete visible answers and report transfer
+  counters and source-specific boundary checks separately. Equal answer text
+  does not prove equality of every KV byte.
+- GPU recovery faults and foreign GPU work invalidate speed windows. Completed
+  execution records preserve failed measurements; completion is not promotion.
 
 ## Attribution
 

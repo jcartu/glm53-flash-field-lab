@@ -1,0 +1,267 @@
+{
+  "fetched_at_channels": {
+    "glm-53-flash": "2026-09-10T06:06:53.671000+00:00",
+    "glm-53": "2026-09-09T18:22:45.294000+00:00",
+    "benchmarking": "2026-09-02T18:00:31.813000+00:00",
+    "vllm": "2026-09-04T22:08:34.728000+00:00",
+    "hardware": "2026-09-10T06:44:02.048000+00:00",
+    "general": "2026-09-10T06:26:48.254000+00:00"
+  },
+  "jcartu_id": "448933919447056385",
+  "hits": [
+    {
+      "channel": "glm-53-flash",
+      "channel_id": "1471527895439638528",
+      "message_id": "1547380722103222312",
+      "timestamp": "2026-09-09T22:58:33.093000+00:00",
+      "author": {
+        "id": "259932435091816450",
+        "username": "keithdawson",
+        "global_name": "KeithDawson"
+      },
+      "matched": {
+        "keith_dawson_author": true,
+        "mentions_jcartu": true,
+        "reply_to_jcartu": false
+      },
+      "content": "Surely someone (cough cough <@448933919447056385> ) has run some of these benches on the LiL Luke quant.\n\nNot seeing anyone who did and reported results in this chat or on the github.\n\nSeems AA-LCR was run https://github.com/local-inference-lab/rtx6kpro/blob/master/models/glm-5.3-flash/aa-lcr-bf16-vs-nvfp4.md and the LiL quant scored 74%, better than the 71% from the FP8 and NV Nvfp4",
+      "referenced_message": {
+        "id": "1547368191821357138",
+        "author": "nearoh.",
+        "content": "How do nvidias quants do? I\u2019ve seen a lot of NVFP4 ones recently. Can\u2019t imagine there\u2019s a practical difference between lukes and nvidias"
+      },
+      "preceding": [
+        {
+          "id": "1547374755399737374",
+          "timestamp": "2026-09-09T22:34:50.520000+00:00",
+          "author": "timricese",
+          "global_name": "timricese",
+          "content": "which is still a lot!"
+        },
+        {
+          "id": "1547374725133631630",
+          "timestamp": "2026-09-09T22:34:43.304000+00:00",
+          "author": "timricese",
+          "global_name": "timricese",
+          "content": "getting 4.1M anyway"
+        },
+        {
+          "id": "1547374718431133706",
+          "timestamp": "2026-09-09T22:34:41.706000+00:00",
+          "author": "drock01057",
+          "global_name": "D-Rock",
+          "content": "<@1480551719514542181> https://github.com/local-inference-lab/LMCache/pull/65\n\nIssue resolution for multi-tenant LMCache collisions."
+        }
+      ]
+    },
+    {
+      "channel": "glm-53-flash",
+      "channel_id": "1471527895439638528",
+      "message_id": "1547368629954150581",
+      "timestamp": "2026-09-09T22:10:30.100000+00:00",
+      "author": {
+        "id": "734200122199638027",
+        "username": "mrweiner",
+        "global_name": "mrweiner"
+      },
+      "matched": {
+        "keith_dawson_author": false,
+        "mentions_jcartu": false,
+        "reply_to_jcartu": true
+      },
+      "content": "https://huggingface.co/nvidia/GLM-5.3-Flash-NVFP4",
+      "referenced_message": {
+        "id": "1547368527382454314",
+        "author": "jcartu",
+        "content": "nvidia dropped an NVFP4 quant of GLM53F?"
+      },
+      "preceding": [
+        {
+          "id": "1547368527382454314",
+          "timestamp": "2026-09-09T22:10:05.645000+00:00",
+          "author": "jcartu",
+          "global_name": "JCartu",
+          "content": "nvidia dropped an NVFP4 quant of GLM53F?"
+        },
+        {
+          "id": "1547368191821357138",
+          "timestamp": "2026-09-09T22:08:45.641000+00:00",
+          "author": "nearoh.",
+          "global_name": "nero",
+          "content": "How do nvidias quants do? I\u2019ve seen a lot of NVFP4 ones recently. Can\u2019t imagine there\u2019s a practical difference between lukes and nvidias"
+        },
+        {
+          "id": "1547368126965092464",
+          "timestamp": "2026-09-09T22:08:30.178000+00:00",
+          "author": "timricese",
+          "global_name": "timricese",
+          "content": "sounds like you need more gpus"
+        }
+      ]
+    },
+    {
+      "channel": "glm-53",
+      "channel_id": "1542910591730192434",
+      "message_id": "1547066080877477898",
+      "timestamp": "2026-09-09T02:08:16.779000+00:00",
+      "author": {
+        "id": "1149206585760030730",
+        "username": "lavd_48722",
+        "global_name": "Lavd"
+      },
+      "matched": {
+        "keith_dawson_author": false,
+        "mentions_jcartu": true,
+        "reply_to_jcartu": true
+      },
+      "content": "Thank you <@448933919447056385>",
+      "referenced_message": {
+        "id": "1547024114701701150",
+        "author": "jcartu",
+        "content": "<@1149206585760030730> **I wouldn't move your 3.42 EXL3 setup to the current JJ images yet.** I checked R28 and the newer **R28.1**, rather than treating the Flash results as results for the full model.\n\nYour compose requires `--quantization=exl3`. In the installed runtimes, after loading their plugins:\n```\nGilded Gnosis r28 / r34  EXL3 loader available\nJovian Judgement R28    Invalid quantization method: exl3\nJovian Judgement R28.1  Invalid quantization method: exl3\n```\nThat's a missing-loader "
+      },
+      "preceding": [
+        {
+          "id": "1547024114701701150",
+          "timestamp": "2026-09-08T23:21:31.263000+00:00",
+          "author": "jcartu",
+          "global_name": "JCartu",
+          "content": "<@1149206585760030730> **I wouldn't move your 3.42 EXL3 setup to the current JJ images yet.** I checked R28 and the newer **R28.1**, rather than treating the Flash results as results for the full model.\n\nYour compose requires `--quantization=exl3`. In the installed runtimes, after loading their plugins:\n```\nGilded Gnosis r28 / r34  EXL3 loader available\nJovian Judgement R28    Invalid quantization method: exl3\nJovian Judgement R28.1  Invalid quantization method: exl3\n```\nThat's a missing-loader compatibility blocker, **not a measured speed regression**. These were CPU-only runtime checks; I haven't run a full-model GPU generation benchmark or produced a JJ EXL3 tokens/sec number. I also haven't changed the checkpoint or precision to force a different comparison.\n\nThis matches Festr's update that full 5.3's new JJ integration is still to come. Once there's an EXL3-capable JJ build, the useful comparison is your exact model/settings against GG\u2014not another Flash test.\n\nExact image digests"
+        },
+        {
+          "id": "1546996168192688240",
+          "timestamp": "2026-09-08T21:30:28.296000+00:00",
+          "author": "festr.",
+          "global_name": "Festr \u1dac\ua799\u01a8",
+          "content": "but I'm slowly progressing towards the full 5.3. flash and qwen - almost done, ds4f/v almost done and I will have time for 5.3 new JJ integration"
+        },
+        {
+          "id": "1546995971274182748",
+          "timestamp": "2026-09-08T21:29:41.347000+00:00",
+          "author": "festr.",
+          "global_name": "Festr \u1dac\ua799\u01a8",
+          "content": "lmcache is fully working on the latest docker but validate for glm flash still only"
+        }
+      ]
+    },
+    {
+      "channel": "glm-53",
+      "channel_id": "1542910591730192434",
+      "message_id": "1546910548820623480",
+      "timestamp": "2026-09-08T15:50:15.047000+00:00",
+      "author": {
+        "id": "1149206585760030730",
+        "username": "lavd_48722",
+        "global_name": "Lavd"
+      },
+      "matched": {
+        "keith_dawson_author": false,
+        "mentions_jcartu": false,
+        "reply_to_jcartu": true
+      },
+      "content": "these are old ones, maybe we've done them already\n`    image: voipmonitor/vllm:gilded-gnosis-v20-vllme1e9426-si200c1db-fi801d57a-cu132-20260804-r28`\n`    image: voipmonitor/vllm:gilded-gnosis-v20-vllm4d006a4-b12xcd3ce19-fi1ac6942-cu132-20260810-r34`\nlets see what festr says about jj -should we move on it with exl3 \ud83e\udd37\u200d\u2642\ufe0f",
+      "referenced_message": {
+        "id": "1546909886724448407",
+        "author": "jcartu",
+        "content": "I'm running a bunch of stuff for the Flash guys and when I'm done with what <@292747031745658880> asked for, I'll put in the queue."
+      },
+      "preceding": [
+        {
+          "id": "1546909886724448407",
+          "timestamp": "2026-09-08T15:47:37.191000+00:00",
+          "author": "jcartu",
+          "global_name": "JCartu",
+          "content": "I'm running a bunch of stuff for the Flash guys and when I'm done with what <@292747031745658880> asked for, I'll put in the queue."
+        },
+        {
+          "id": "1546909460268843038",
+          "timestamp": "2026-09-08T15:45:55.516000+00:00",
+          "author": "jcartu",
+          "global_name": "JCartu",
+          "content": "I am on 3.42 but my iron has been running flash stuff for the flash group for 3 days straight."
+        },
+        {
+          "id": "1546908372425515038",
+          "timestamp": "2026-09-08T15:41:36.154000+00:00",
+          "author": "lavd_48722",
+          "global_name": "Lavd",
+          "content": "<@292747031745658880> anything good for exl3 fellas in jj? or just flash nvfp4 stuff?"
+        }
+      ]
+    },
+    {
+      "channel": "glm-53",
+      "channel_id": "1542910591730192434",
+      "message_id": "1546906791416307745",
+      "timestamp": "2026-09-08T15:35:19.212000+00:00",
+      "author": {
+        "id": "1149206585760030730",
+        "username": "lavd_48722",
+        "global_name": "Lavd"
+      },
+      "matched": {
+        "keith_dawson_author": false,
+        "mentions_jcartu": true,
+        "reply_to_jcartu": false
+      },
+      "content": "<@267523720065581062> would be nice if someone tried newer docker containers with this and report\n<@448933919447056385> you on this 3.42bpw too?",
+      "referenced_message": {
+        "id": "1546629210397745162",
+        "author": "lavd_48722",
+        "content": ""
+      },
+      "preceding": [
+        {
+          "id": "1546867430603620362",
+          "timestamp": "2026-09-08T12:58:54.863000+00:00",
+          "author": "flobernd",
+          "global_name": "flo",
+          "content": "It's DCP4/8. Don't think I've ever got higher numbers on this machine. PCIe5, Dual Turin. It has a strange PCIe switch architecture (ASUS ESC8000A-E13P case), so maybe that's the issue. The config should be fine anyways."
+        },
+        {
+          "id": "1546863012827107408",
+          "timestamp": "2026-09-08T12:41:21.583000+00:00",
+          "author": "joninco",
+          "global_name": "Jon",
+          "content": "not yet. It's no joke trying to get this merged upstream."
+        },
+        {
+          "id": "1546859744960970832",
+          "timestamp": "2026-09-08T12:28:22.463000+00:00",
+          "author": "ufear",
+          "global_name": "ufear",
+          "content": "Your numbers look quite low to me, PCIe4 or something?"
+        }
+      ]
+    }
+  ],
+  "question_summary": "keithdawson (glm-53-flash, 2026-09-09T22:58:33Z, msg 1471600509445939399) asks whether anyone (paging jcartu) has run benches on the 'LiL Luke quant' (local-inference-lab GLM-5.3-Flash-NVFP4, our published checkpoint) and reports results in this chat or on the github; he cites AA-LCR (aa-lcr-bf16-vs-nvfp4.md) scoring the LiL quant 74% vs 71% for FP8 and NVIDIA NVFP4.",
+  "candidate_answers": [
+    {
+      "topic": "No-spec decode throughput on the LiL/Luke NVFP4 quant (the exact checkpoint he asks about)",
+      "receipt": "drock-lmcache/r29-execution-20260909/runtime-baseline/paired-runtime-comparison.json",
+      "figures": "TP4/DCP1, GPU-local FP8 KV, two independent boots per image, ABBA: C1 175.1/175.2 tok/s, C4 490.7/489.9 (ctx0) and 490.6/491.4 (32K), C8 786.5/783.5 (ctx0) and 783.2/781.1 (32K); R28.1-vs-R29 image deltas -0.39%..+0.20% (descriptive, not a significance claim)"
+    },
+    {
+      "topic": "Speculative decoding on the same checkpoint (MTP3)",
+      "receipt": "drock-lmcache/r29-execution-20260909/speculative-matrix/published-dcp1-mtp3-trial1.json and -trial2.json",
+      "figures": "MTP3 DCP1: C1 257.7-276.5, C4 653.0-680.7, C8 941.4-1001.9 tok/s; DCP4 (published-dcp4-mtp3-trial1.json): C4 582.5-593.8, C8 849.6-867.2 tok/s"
+    },
+    {
+      "topic": "DFlash2 on the same checkpoint (with a known C8 collapse on the R29 launcher pin)",
+      "receipt": "drock-lmcache/r29-execution-20260909/speculative-matrix/published-dcp1-dflash2-trial1.json + dflash2-c8-step-collapse-note.json",
+      "figures": "C1 243.7, C4 504.5-526.3 tok/s; C8 collapses to 54.9-58.9 tok/s (~18-20 verifier steps/s) with the R29 capture-size pin (max 32); fixed upstream by R31 launcher defaults (r31-preflight/launcher-contract.json)"
+    },
+    {
+      "topic": "Quality on the same checkpoint (functional/behavior suites, not AA-LCR)",
+      "receipt": "drock-lmcache/r29-execution-20260909/checkpoint-comparison/r29-{published,qad2500,tvn1500}/behavior/summary.json + semantic-rescore-v2.json",
+      "figures": "published: strict 48/61, semantic 58/59; qad2500: strict 48/61, semantic 56/58; tvn1500: strict 45/61, semantic 57/57"
+    },
+    {
+      "topic": "Recorded cross-checkpoint summary (original scoring)",
+      "receipt": "drock-lmcache/r29-execution-20260909/GPU-COORDINATION.md (line 14)",
+      "figures": "published/QAD2500/TVN1500 scored 42/44/38 strict-format and 52/52/50 semantic successes out of 52 functional tasks; long-history controls 32/32/31 of 32"
+    }
+  ],
+  "note": "AA-LCR (74% vs 71%) is a different benchmark we have not run; our receipts cover decode throughput, speculative modes, and functional/behavior quality on the LiL/Luke NVFP4 published checkpoint. All figures verbatim from the listed receipt files."
+}

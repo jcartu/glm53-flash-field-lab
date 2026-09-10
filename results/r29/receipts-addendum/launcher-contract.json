@@ -1,0 +1,49 @@
+{
+  "schema": "r29-launcher-contract/v1 (r32 preflight)",
+  "generated_at": "2026-09-10T08:25:00+02:00",
+  "timezone": "Europe/Berlin",
+  "purpose": "CPU-only preflight of R32 versus R31; no container started, no GPU touched.",
+  "images": {
+    "r32_candidate": "localinferencelab/vllm@sha256:c9ad4a6ef4aa55232df9ed1a37e85d94eb8c7d5349561a6cbe828e72b61de83c",
+    "r32_tag": "localinferencelab/vllm:jovian-judgement-community-20260909-r32",
+    "r31_baseline": "localinferencelab/vllm@sha256:da7157d5649a85298635c44b03eeb127837448fa42a45388e48ad9de4a99ff39",
+    "manifest": "docker manifest inspect -v: single-manifest linux/amd64, digest c9ad4a6ef4aa55232df9ed1a37e85d94eb8c7d5349561a6cbe828e72b61de83c",
+    "entrypoint": "/usr/local/bin/serve-glm53-flash.sh (unchanged)"
+  },
+  "extraction_method": {
+    "procedure": "docker create --runtime runc --network none -e NVIDIA_VISIBLE_DEVICES=void --entrypoint /bin/true <digest>; docker cp; docker rm (container never started)",
+    "r32_container_id": "bcd1d66c48f8ae3c92566e56a82a1bf4d7673250275f1a1363ea7e18d0bf9958 (removed after extraction)",
+    "r31_reference_extraction": "R/r31-preflight/extracted (immutable)"
+  },
+  "file_diffs_vs_r31": {
+    "/opt/glm53-flash/source.lock": "DIFFERS (see key_changes)",
+    "/usr/local/bin/serve-glm53-flash.sh": "IDENTICAL",
+    "/usr/local/libexec/serve-glm53-flash-lmcache-cache-complete.sh": "IDENTICAL",
+    "/usr/local/bin/serve-glm53-flash-nvfp4-dflash2.sh": "IDENTICAL",
+    "/usr/local/libexec/serve-glm53-flash-nvfp4-dflash2.sh": "IDENTICAL",
+    "/opt/venv/lib/python3.12/site-packages/lmcache/integration/vllm/recurrent_checkpoint_connector.py": "IDENTICAL (also byte-identical to the R29/R30 file hashed in R/cache-metric-contract/contract-finding.json: sha256 59193d10566efc19a2ce271bda51cef971cb6f92723dc39e8da50d4f7c828c52)"
+  },
+  "key_changes": {
+    "lmcache.commit": "f868580a475b7e6f7fd81e586526481d4dbead0e -> 35ad809fdddd430c3970777a2ff3d984bf8d1963 (version ...glm53checkpoints.35ad809f); this is the ONLY functional delta: D-Rock's LMCache PR #65 (overlapping checkpoint stores sharing an immutable page wait for its writer instead of losing the checkpoint and recomputing; background retry; committed pages need no duplicate copy)",
+    "vllm.commit": "UNCHANGED at 5576927057cf71b6ec61d120932338b333efa089 (vllm.version r31.vllm55769270 -> r32.vllm55769270; vllm.tree and vllm.package.tree unchanged; vllm.bundle.sha256 changed a52e3e19 -> 8fc8d41b, consistent with repackaging, matches the changelog's 'no compute/kernel change')",
+    "b12x": "commit unchanged (3edbcbce70f491741b82f5eab9c1b30b39447228); repository line reverted local-inference-lab/b12x.git -> voipmonitor/b12x.git and bundle sha256 changed 3911c758 -> 5823d9dd (provenance metadata flip; no commit change)",
+    "runtime.cache.fingerprint": "lmcache4305bd4c -> lmcache65712f84 only"
+  },
+  "specific_checks": {
+    "recurrent_connector_request_finished": "still returns (False, None) at recurrent_checkpoint_connector.py:346-352; per-request cached_token_stats remains unavailable on R32, the counter-delta observer rule stays required; the cancellation telemetry gap persists",
+    "modelopt_mixed_hardcode": "UNCHANGED: /usr/local/libexec/serve-glm53-flash-nvfp4-dflash2.sh:241 still passes --quantization modelopt_mixed; the NVIDIA checkpoint still resolves to modelopt_fp4 via ModelOptNvFp4Config.override (vllm commit unchanged), so R/nvidia-nvfp4-readiness/readiness.json verdicts carry over verbatim (loadable_mtp0 true, loadable_speculative false, LOAD_FORMAT=safetensors first boot)",
+    "capture_size_defaults": "UNCHANGED from R31: dflash2 wrapper defaults CUDAGRAPH_CAPTURE_SIZES='1 2 4 8 16 32 40 48 64 96 128 192 256' with MAX_CUDAGRAPH_CAPTURE_SIZE=256 (bin wrapper line 8/10); stock R32 keeps the C8 capture fix",
+    "changelog_vs_our_findings": {
+      "dcp_restore_identity": "R32 changes nothing in vLLM; our DCP4 identity finding (not_reproduced, one-off on R30) is untouched; the R31 dcp4-mtp3 lifecycle arm already passed both identity gates",
+      "cancellation_telemetry": "unchanged (connector byte-identical); the 3 unavailable observability gates would recur on R32 until the probe-side fix we recommended",
+      "dedup": "R31 already passed both dedup gates on dcp4-mtp3; #65 addresses a different failure (concurrent overlapping STORE collision, multi-tenant), which our single-writer bounded namespaces do not specifically exercise",
+      "checkpoint_loading": "no vLLM change; nothing here alters the NVIDIA loader analysis",
+      "issue_726": "MTP + strict JSON schema + LMCache HTTP 500 acknowledged, reproduced on R31, tracked separately; our lifecycle/behavior probes do not use structured-output schemas"
+    }
+  },
+  "verdict": {
+    "launcher_contract_compatible": true,
+    "summary": "R32 = R31 + LMCache 35ad809f (#65 store-collision wait/retry). All launcher scripts and the recurrent connector byte-identical to R31. No draft conclusion changes; R32 is the natural candidate image for any further LMCache lifecycle work, with stock R31 as the matched control isolating #65."
+  },
+  "source_messages": "R/new-drop-r32-messages.txt (verbatim bot announcement + channel captures since 2026-09-09T22:00Z)"
+}
